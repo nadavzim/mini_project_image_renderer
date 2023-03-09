@@ -25,6 +25,9 @@ public class Vector extends Point{
     Vector(Double3 double3) {
 //        super(double3);
         this(double3.d1, double3.d2, double3.d3);
+        if(xyz.equals(Double3.ZERO)){
+            throw new IllegalArgumentException("Vector can't be vector(0,0,0)");
+        }
     }
 
     public double length() {
@@ -32,19 +35,30 @@ public class Vector extends Point{
     }
 
     public double lengthSquared() {
-        double x = xyz.d1;
-        double y = xyz.d2;
-        double z = xyz.d3;
+        double x = this.xyz.d1;
+        double y = this.xyz.d2;
+        double z = this.xyz.d3;
 
         return x*x + y*y +z*z;
+    }
+    public Vector add(Vector vector) {
+        return new Vector(xyz.add(vector.xyz));
     }
 
     public Vector normalize() {
         double len = length();
 
-        double x = xyz.d1/len;
-        double y = xyz.d2/len;
-        double z = xyz.d3/len;
+        double x = this.xyz.d1/len;
+        double y = this.xyz.d2/len;
+        double z = this.xyz.d3/len;
+
+        return new Vector(x, y, z);
+
+    }
+    public Vector scale(double number) {
+        double x = this.xyz.d1 * number;
+        double y = this.xyz.d2 * number;
+        double z = this.xyz.d3 * number;
 
         return new Vector(x, y, z);
 
@@ -57,10 +71,29 @@ public class Vector extends Point{
         return x + y + z;
     }
 
-    public Vector crossProduct(Vector v) {
-        double x = xyz.d2 * v.xyz.d3 - xyz.d3 * v.xyz.d2;
-        double y = xyz.d3 * v.xyz.d1 - xyz.d1 * v.xyz.d3;
-        double z = xyz.d1 * v.xyz.d2 - xyz.d2 * v.xyz.d1;
+    public Vector crossProduct(Vector other) {
+        double x = this.xyz.d2 * other.xyz.d3 - this.xyz.d3 * other.xyz.d2;
+        double y = this.xyz.d3 * other.xyz.d1 - this.xyz.d1 * other.xyz.d3;
+        double z = this.xyz.d1 * other.xyz.d2 - this.xyz.d2 * other.xyz.d1;
         return new Vector(x, y, z);
+    }
+
+    /**
+     * Determines if this Point object is equal to another object.
+     * Two Point objects are considered equal if their coordinates are equal.
+     *
+     * @param o the object to compare to this Point object
+     * @return true if the objects are equal, false otherwise
+     */
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if (!(o instanceof Vector vector)) return false;
+        return xyz.equals(vector.xyz);
+    }
+
+    @Override
+    public String toString() {
+        return "Vector: " + "xyz=" + xyz ;
     }
 }

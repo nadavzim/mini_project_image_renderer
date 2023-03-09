@@ -1,8 +1,8 @@
 package primitives;
 
 public class Ray {
-    private Point p0;
-    private Vector dir;
+     Point p0;
+     Vector dir;
 
     /**
      * Constructs a Ray object with the given starting point and direction.
