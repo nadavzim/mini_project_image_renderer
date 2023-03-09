@@ -49,4 +49,18 @@ public class Vector extends Point{
         return new Vector(x, y, z);
 
     }
+
+    public double dotProduct(Vector v3) {
+        double x = xyz.d1*v3.xyz.d1;
+        double y = xyz.d2*v3.xyz.d2;
+        double z = xyz.d3*v3.xyz.d3;
+        return x + y + z;
+    }
+
+    public Vector crossProduct(Vector v) {
+        double x = xyz.d2 * v.xyz.d3 - xyz.d3 * v.xyz.d2;
+        double y = xyz.d3 * v.xyz.d1 - xyz.d1 * v.xyz.d3;
+        double z = xyz.d1 * v.xyz.d2 - xyz.d2 * v.xyz.d1;
+        return new Vector(x, y, z);
+    }
 }
