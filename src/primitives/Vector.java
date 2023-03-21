@@ -5,10 +5,10 @@ public class Vector extends Point{
     /**
      * Constructs a new Vector object with the specified x, y, and z coordinates.
      *
-     * @param x the x-coordinate of the new Point object
-     * @param y the y-coordinate of the new Point object
-     * @param z the z-coordinate of the new Point object
-     * @throw throw IllegalArgumentException in case of Vector Zero
+     * @param x the x-coordinate of the new Vector object
+     * @param y the y-coordinate of the new Vector object
+     * @param z the z-coordinate of the new Vector object
+     * @throw IllegalArgumentException if the vector is a zero vector
      */
     public Vector(double x, double y, double z) {
         super(x, y, z);
@@ -20,7 +20,7 @@ public class Vector extends Point{
     /**
      * Constructs a new Vector object from a Double3 object.
      *
-     * @param double3 the Double3 object to construct the Point from
+     * @param double3 the Double3 object to construct the Vector from
      */
     Vector(Double3 double3) {
         this(double3.d1, double3.d2, double3.d3);
@@ -29,10 +29,20 @@ public class Vector extends Point{
         }
     }
 
+    /**
+     * Returns the length of the vector.
+     *
+     * @return the length of the vector
+     */
     public double length() {
         return Math.sqrt(lengthSquared());
     }
 
+    /**
+     * Returns the squared length of the vector.
+     *
+     * @return the squared length of the vector
+     */
     public double lengthSquared() {
         double x = this.xyz.d1;
         double y = this.xyz.d2;
@@ -40,10 +50,22 @@ public class Vector extends Point{
 
         return x*x + y*y +z*z;
     }
+
+    /**
+     * Returns the sum of this vector and the specified vector.
+     *
+     * @param vector the vector to add to this vector
+     * @return the sum of this vector and the specified vector
+     */
     public Vector add(Vector vector) {
         return new Vector(xyz.add(vector.xyz));
     }
 
+    /**
+     * Returns a new vector that is the normalized version of this vector.
+     *
+     * @return a new vector that is the normalized version of this vector
+     */
     public Vector normalize() {
         double len = length();
 
@@ -54,6 +76,13 @@ public class Vector extends Point{
         return new Vector(x, y, z);
 
     }
+
+    /**
+     * Returns a new vector that is the result of scaling this vector by the specified number.
+     *
+     * @param number the number to scale this vector by
+     * @return a new vector that is the result of scaling this vector by the specified number
+     */
     public Vector scale(double number) {
         double x = this.xyz.d1 * number;
         double y = this.xyz.d2 * number;
@@ -63,6 +92,12 @@ public class Vector extends Point{
 
     }
 
+    /**
+     * Returns the dot product of this vector and the specified vector.
+     *
+     * @param v3 the vector to compute the dot product with
+     * @return the dot product of this vector and the specified vector
+     */
     public double dotProduct(Vector v3) {
         double x = xyz.d1*v3.xyz.d1;
         double y = xyz.d2*v3.xyz.d2;
@@ -70,6 +105,12 @@ public class Vector extends Point{
         return x + y + z;
     }
 
+    /**
+     * Computes the cross product of this vector and the given vector and returns a new Vector object that represents the result.
+     *
+     * @param other the vector to compute the cross product with
+     * @return a new Vector object representing the cross product of this vector and the given vector
+     */
     public Vector crossProduct(Vector other) {
         double x = this.xyz.d2 * other.xyz.d3 - this.xyz.d3 * other.xyz.d2;
         double y = this.xyz.d3 * other.xyz.d1 - this.xyz.d1 * other.xyz.d3;
@@ -91,8 +132,12 @@ public class Vector extends Point{
         return xyz.equals(vector.xyz);
     }
 
+/**
+ * Returns a string representation of this Vector object.
+ *
+ * @return a string representation of this Vector object
+ */
     @Override
     public String toString() {
         return "Vector: " + "xyz=" + xyz ;
-    }
-}
+    }}

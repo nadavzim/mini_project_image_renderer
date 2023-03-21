@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package primitives;
 
 import static primitives.Util.isZero;
@@ -39,21 +37,37 @@ public class Double3 {
       this.d3 = value;
    }
 
+   /**
+    Indicates whether some other object is "equal to" this one.
+    @param obj The reference object with which to compare.
+    @return true if this object is the same as the obj argument; false otherwise.
+    */
    @Override
    public boolean equals(Object obj) {
       if (this == obj) return true;
       if (obj instanceof Double3 other)
          return isZero(d1 - other.d1)
-               && isZero(d2 - other.d2)
-               && isZero(d3 - other.d3);
+                 && isZero(d2 - other.d2)
+                 && isZero(d3 - other.d3);
       return false;
    }
-
+   /**
+    Returns a hash code value for the object.
+    @return A hash code value for this object.
+    */
    @Override
-   public int hashCode() { return (int) Math.round(d1 + d2 + d3); }
+   public int hashCode() {
+      return (int) Math.round(d1 + d2 + d3);
+   }
+   /**
 
+    Returns a string representation of the object.
+    @return A string representation of the object.
+    */
    @Override
-   public String toString() { return "(" + d1 + "," + d2 + "," + d3 + ")"; }
+   public String toString() {
+      return "(" + d1 + "," + d2 + "," + d3 + ")";
+   }
 
    /** Sum two floating point triads into a new triad where each couple of numbers
     * is summarized

@@ -136,10 +136,22 @@ public class Point {
         return dx * dx + dy * dy + dz * dz;
     }
 
+    /**
+     * Returns a new Point object that is the result of adding a Vector object to this Point object.
+     *
+     * @param vector the Vector object to add to this Point object
+     * @return the resulting Point object after adding the Vector object
+     */
     public Point add(Vector vector) {
         return new Point(xyz.add(vector.xyz));
     }
 
+    /**
+
+     Computes a new Vector object as the difference between this Point object and another Point object.
+     @param secondPoint the Point object to subtract from this Point object
+     @return a new Vector object representing the difference between this Point object and the other Point object
+     */
     public Vector subtract(Point secondPoint) {
         return new Vector(xyz.subtract(secondPoint.xyz));
     }
