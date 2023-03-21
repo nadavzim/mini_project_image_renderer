@@ -23,7 +23,6 @@ public class Vector extends Point{
      * @param double3 the Double3 object to construct the Point from
      */
     Vector(Double3 double3) {
-//        super(double3);
         this(double3.d1, double3.d2, double3.d3);
         if(xyz.equals(Double3.ZERO)){
             throw new IllegalArgumentException("Vector can't be vector(0,0,0)");
