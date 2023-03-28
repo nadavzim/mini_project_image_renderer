@@ -29,6 +29,8 @@ package geometries;
 import primitives.Point;
 import primitives.Vector;
 
+import static primitives.Util.isZero;
+
 public class Plane implements Geometry {
     /** The base point of the plane. */
     Point q0;
@@ -71,7 +73,12 @@ public class Plane implements Geometry {
      */
     public Plane(Point a, Point b, Point c ) {
         this.q0 = a;
-        this.normal = null;
+        Vector v1 = a.subtract(b);
+        Vector v2 = a.subtract(c);
+        if(isZero(v1.dotProduct(v2))) // TODO: 3/28/2023 check if the points are on the same line
+            throw new IllegalArgumentException("The point's are on the same line");
+        Vector v3 = v1.crossProduct(v2).normalize();
+        this.normal = v3;
         //this.normal = normal.normalize();
     }
 
