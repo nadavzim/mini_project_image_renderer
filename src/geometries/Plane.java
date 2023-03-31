@@ -1,27 +1,3 @@
-//package geometries;
-//
-//import primitives.Point;
-//import primitives.Vector;
-//
-//public class Plane implements Geometry {
-//    Point q0;
-//    Vector normal;
-//
-//    public Plane(Point q0, Vector normal) {
-//        this.q0 = q0;
-//        this.normal = normal.normalize();
-//    }
-//
-//    public Vector getNormal(Point p){return normal;}
-//    public Vector getNormal(){return normal;}
-//
-//    public Plane(Point a, Point b, Point c ) {
-//        this.q0 = a;
-//        this.normal = null;
-//        //this.normal = normal.normalize();
-//    }
-//}
-
 /**
  A class representing a plane in a three-dimensional space.
  */
@@ -77,9 +53,7 @@ public class Plane implements Geometry {
         Vector v2 = a.subtract(c);
         if(isZero(v1.dotProduct(v2))) // TODO: 3/28/2023 check if the points are on the same line
             throw new IllegalArgumentException("The point's are on the same line");
-        Vector v3 = v1.crossProduct(v2).normalize();
-        this.normal = v3;
-        //this.normal = normal.normalize();
+        normal = v1.crossProduct(v2).normalize();
     }
 
 }
