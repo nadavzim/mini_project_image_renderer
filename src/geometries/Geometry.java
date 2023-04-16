@@ -12,5 +12,5 @@ public interface Geometry {
      * @param point the point on the geometry object
      * @return the normal vector to the geometry object at the given point
      */
-    public Vector getNormal(Point point);
+    Vector getNormal(Point point);
 }

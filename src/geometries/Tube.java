@@ -3,6 +3,7 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
+import static primitives.Util.isZero;
 
 /**
  * This class represents a tube shape in 3D space, which is defined by its radius and axis Ray.
@@ -17,8 +18,10 @@ public class Tube extends RadialGeometry{
      * @param radius   The radius of the tube.
      * @param axisRay  The axis Ray of the tube.
      */
-    public Tube(double radius, Ray axisRay) {
+    public Tube(Ray axisRay, double radius) {
         super(radius);
+        if(radius<=0)
+            throw new IllegalArgumentException("This radius is not legal!");
         this.axisRay = axisRay;
     }
 
@@ -39,6 +42,24 @@ public class Tube extends RadialGeometry{
      */
     @Override
     public Vector getNormal(Point point) {
-        return null;
+        // Finding the normal:
+        // n = normalize(p - o)
+        // t = v * (p - p0)
+        // o = p0 + t * v
+
+        Vector v= axisRay.getDir();
+        Point p0 =axisRay.getP0();
+
+        double t= v.dotProduct(point.subtract(p0));
+
+        //if t=0, then t*v is the zero vector and o=p0.
+        Point o=p0;
+
+        if(!isZero(t))
+        {
+            o=p0.add(v.scale(t));
+        }
+
+        return point.subtract(o).normalize();
     }
 }

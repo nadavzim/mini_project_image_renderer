@@ -1,26 +1,4 @@
-//package geometries;
-//
-//import primitives.Point;
-//import primitives.Vector;
-//
-//public class Sphere extends RadialGeometry {
-//    Point center;
-//
-//    public Point getCenter() {
-//        return center;
-//    }
-//
-//    public Sphere(double radius, Point center) {
-//        super(radius);
-//        this.center = center;
-//    }
-//
-//    public Vector getNormal(Point point) {return null;}
-//}
-//
-
 /**
-
  A class representing a sphere in a three-dimensional space.
  */
 package geometries;
@@ -30,7 +8,6 @@ import primitives.Vector;
 public class Sphere extends RadialGeometry {
     /** The center point of the sphere. */
     Point center;
-
     /**
      * Returns the center point of the sphere.
      * @return the center point of the sphere.
@@ -55,7 +32,7 @@ public class Sphere extends RadialGeometry {
      * @return the normal vector of the sphere at the given point.
      */
     public Vector getNormal(Point point) {
-        return null;
+        return  (point.subtract(this.center).normalize());
     }
 
 }
