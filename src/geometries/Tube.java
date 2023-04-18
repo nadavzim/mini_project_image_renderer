@@ -3,6 +3,8 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
+
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 /**
@@ -50,16 +52,22 @@ public class Tube extends RadialGeometry{
         Vector v= axisRay.getDir();
         Point p0 =axisRay.getP0();
 
-        double t= v.dotProduct(point.subtract(p0));
+        Vector vec = point.subtract(p0);
+        double t = v.dotProduct(vec);
+        //t = alignZero(t);
 
         //if t=0, then t*v is the zero vector and o=p0.
         Point o=p0;
 
         if(!isZero(t))
         {
-            o=p0.add(v.scale(t));
+            o = p0.add(v.scale(t));
         }
-
-        return point.subtract(o).normalize();
+        else
+            return vec.normalize();
+        if (point.equals(o))
+            throw new IllegalArgumentException("point cannot be on the tube axis");
+        Vector res = point.subtract(o).normalize();
+        return res;
     }
 }
