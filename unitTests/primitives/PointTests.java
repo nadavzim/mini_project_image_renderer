@@ -19,7 +19,7 @@ class PointTests {
     @Test
     void testAdd() {
         // ============ Equivalence Partitions Tests ==============
-        // TC01: Simple test
+        // TC01: simple test
         assertEquals(new Point(2, 3, 4),
                 new Point(1, 1, 1).add(new Vector(1, 2, 3)), //
                 "Wrong point add");

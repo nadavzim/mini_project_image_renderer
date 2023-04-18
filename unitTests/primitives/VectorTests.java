@@ -95,7 +95,6 @@ class VectorTests {
         assertEquals(14d,
                 v1.lengthSquared(), 0.00001,
                 "lengthSquared() wrong value");
-
     }
 
     /**
@@ -127,11 +126,6 @@ class VectorTests {
         assertEquals(new Vector(1, 1, 1),
                 new Vector(2, 3, 4).add(new Vector(-1, -2, -3)),
                 "Wrong vector add");
-
-        // =============== Boundary Values Tests ==================
-        // TC11: test adding v + (-v)
-//		assertThrows("Add v plus -v must throw exception", IllegalArgumentException.class,
-//				() -> new Vector(1, 2, 3).add(new Vector(-1, -2, -3)));
     }
 
     /**
@@ -173,11 +167,6 @@ class VectorTests {
         assertEquals(new Vector(1, 1, 1),
                 new Point(2, 3, 4).subtract(new Point(1, 2, 3)),
                 "Wrong point subtract");
-
-        // =============== Boundary Values Tests ==================
-        // TC11: test subtracting same point
-//		assertThrows("Subtract P from P must throw exception", IllegalArgumentException.class,
-//				() -> new Point(1, 2, 3).subtract(new Point(1, 2, 3)));
     }
 
     /**
