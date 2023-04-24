@@ -4,6 +4,8 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
@@ -69,5 +71,10 @@ public class Tube extends RadialGeometry{
             throw new IllegalArgumentException("point cannot be on the tube axis");
         Vector res = point.subtract(o).normalize();
         return res;
+    }
+
+    @Override
+    public List<Point> findIntsersections(Ray ray) {
+        return null;
     }
 }

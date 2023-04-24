@@ -7,7 +7,6 @@ public class Ray {
     /**
      * Constructs a Ray object with the given starting point and direction.
      * The direction vector is normalized.
-     *
      * @param p0  the starting point of the ray
      * @param dir the direction of the ray
      */

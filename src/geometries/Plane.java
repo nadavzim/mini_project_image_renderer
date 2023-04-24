@@ -3,7 +3,10 @@
  */
 package geometries;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 import static primitives.Util.isZero;
 
@@ -30,6 +33,24 @@ public class Plane implements Geometry {
     }
 
     /**
+     * Constructs a plane object with the given three points.
+     *
+     * @param a the first point.
+     * @param b the second point.
+     * @param c the third point.
+     */
+    public Plane(Point a, Point b, Point c) {
+        this.q0 = a;
+        Vector v1 = a.subtract(b);
+        Vector v2 = a.subtract(c);
+        try {
+            normal = v1.crossProduct(v2).normalize();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("This three points in the same line!");
+        }
+    }
+
+    /**
      * Returns the normal vector of the plane at the given point.
      *
      * @param p the point to get the normal vector at.
@@ -48,22 +69,9 @@ public class Plane implements Geometry {
         return normal;
     }
 
-    /**
-     * Constructs a plane object with the given three points.
-     *
-     * @param a the first point.
-     * @param b the second point.
-     * @param c the third point.
-     */
-    public Plane(Point a, Point b, Point c) {
-        this.q0 = a;
-        Vector v1 = a.subtract(b);
-        Vector v2 = a.subtract(c);
-        try {
-            normal = v1.crossProduct(v2).normalize();
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("This three points in the same line!");
-        }
+    @Override
+    public List<Point> findIntsersections(Ray ray) {
+        return null;
     }
 }
 
