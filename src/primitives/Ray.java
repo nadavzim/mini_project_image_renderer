@@ -56,6 +56,10 @@ public class Ray {
     public String toString() {
         return "Ray :" + "p0=" + p0 + ", dir=" + dir;
     }
+
+    public Point getPoint(double t) {
+        return p0.add(dir.scale(t));
+    }
 }
 
 
