@@ -1,17 +1,13 @@
 package geometries;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-import static primitives.Util.isZero;
-
 import org.junit.jupiter.api.Test;
-
-import geometries.Polygon;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static primitives.Util.isZero;
+import java.util.List;
 
 /** Testing Polygons
  * @author Dan */
@@ -88,4 +84,49 @@ public class PolygonTests {
          assertTrue(isZero(result.dotProduct(pts[i].subtract(pts[i == 0 ? 3 : i - 1]))),
                     "Polygon's normal is not orthogonal to one of the edges");
    }
+
+    @Test
+   void findIntersections() {
+      Polygon p = new Polygon(
+              new Point(1,1,1),
+              new Point(2,0.5,0.5),
+              new Point(1,-1,1),
+              new Point(-2,0.5,2.5));
+
+      // ============ Equivalence Partitions Tests ==============
+      // TC01: intersection in the polygon
+      Ray r1 = new Ray(new Point(-2,-1,0.5), new Vector(6,2,0.5));
+      List<Point> points = p.findIntersections(r1);
+      assertEquals(1,points.size(),"Wrong number of points");
+//      assertEquals(new Point(1.4285714285714288,0.14285714285714302,0.7857142857142858),points.get(0),
+//              "Ray intersection isn't working on polygon");
+
+       //TC02: Ray intersect outside Triangle against edge
+      Ray r2 = new Ray(new Point(-1, -1, 1), new Vector(1, 1, 4));
+      assertNull(p.findIntersections(r2),
+              "findIntersections() wrong result");
+
+      //TC03: Ray intersect outside Triangle against vertex
+      Ray r3 = new Ray(new Point(-1, -1, 1), new Vector(7, 4, -1));
+      assertNull(p.findIntersections(r3),
+              "findIntersections() wrong result");
+
+      // =============== Boundary Values Tests ==================
+      //TC11: Ray intersect on edge
+      Ray r4 = new Ray(new Point(-1, -1, 1), new Vector(-5, -3, -1.6));
+      assertNull(p.findIntersections(r4),
+              "findIntersections() Ray intersect on edge wrong result");
+
+      //TC12: Ray intersect in vertex
+      Ray r5 = new Ray(new Point(-1, -1, 1), new Vector(0, -1, 3));
+      assertNull(p.findIntersections(r5),
+              "findIntersections() Ray intersect in vertex wrong result");
+
+      //TC13: Ray intersect on edge's continuation
+      Ray r6 = new Ray(new Point(-1, -1, 1), new Vector(-3, -5, -1.5));
+      assertNull(p.findIntersections(r6),
+              "findIntersections() Ray intersect on edge's continuation wrong result");
+   }
 }
+
+
