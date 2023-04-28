@@ -112,4 +112,15 @@ public class Point {
     public Vector subtract(Point secondPoint) {
         return new Vector(xyz.subtract(secondPoint.xyz));
     }
+    public double getX() {
+        return xyz.d1;
+    }
+
+    public double getY() {
+        return xyz.d2;
+    }
+
+    public double getZ() {
+        return xyz.d3;
+    }
 }
