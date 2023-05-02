@@ -1,12 +1,12 @@
 package renderer;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
 
 import static primitives.Util.isZero;
 
 public class Camera {
-
     private Point p0;
     private Vector vUp;
     private Vector vTo;
@@ -60,5 +60,16 @@ public class Camera {
             this.vRight = vTo.crossProduct(vUp).normalize();
         }
     }
-
+    public Camera setVPSize(double width, double height){
+        this.width = width;
+        this.height = height;
+        return  this;
+    }
+    public Camera setVPDistance(double distance){
+        this.distance = distance;
+        return this;
+    }
+    public Ray constructRay(int nX, int nY, int j, int i){
+        return null;
+    }
 }
