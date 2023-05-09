@@ -1,8 +1,11 @@
 package renderer;
 
+import primitives.Color;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
+
+import java.util.MissingResourceException;
 
 import static primitives.Util.isZero;
 
@@ -21,6 +24,8 @@ public class Camera {
     private double height;
     // the distance between the camera and the view plane
     private double distance;
+    private ImageWriter imageWriter;
+    private RayTracerBase rayTracer;
 
     //------------------getters------------------//
     public Point getP0() {
@@ -93,6 +98,27 @@ public class Camera {
         this.distance = distance;
         return this;
     }
+    /**
+     * set the image writer
+     *
+     * @param imageWriter the image writer
+     * @return the camera
+     */
+    public Camera setImageWriter (ImageWriter imageWriter) {
+        this.imageWriter = imageWriter;
+        return this;
+    }
+    /**
+     * set the ray tracer
+     *
+     * @param rayTracer the ray tracer
+     * @return the camera
+     */
+    public Camera setRayTracer (RayTracerBase rayTracer) {
+        this.rayTracer = rayTracer;
+        return this;
+    }
+
 
     /**
      * construct a ray from the camera to the view plane
@@ -128,4 +154,62 @@ public class Camera {
 
         return new Ray(p0, Vij);
     }
+
+    /**
+     *  The function iterates over all the pixels in the image and casts a ray through each pixel
+     */
+    public void renderImage() {
+        try {
+            if (imageWriter == null) {
+                throw new MissingResourceException("Renderer resource not set", ImageWriter.class.getName(), "");
+            }
+            if (rayTracer == null) {
+                throw new MissingResourceException("Renderer resource not set", RayTracerBase.class.getName(), "");
+            }
+            int nX = imageWriter.getNx();
+            int nY = imageWriter.getNy();
+
+            for (int row = 0; row < nY; row++) {
+                for (int col = 0; col < nX; col++) {
+                    castRay(nX, nY, row, col);
+                    this.imageWriter.writePixel(col, row, pixelColor);
+
+                }
+            }
+
+        } catch (MissingResourceException e) {
+            throw new UnsupportedOperationException("Not yet initialized" + e.getClassName());
+        }
+    }
+
+    /**
+     * This function prints a grid on the image, with the given interval and color.
+     *
+     * @param interval the interval between the lines
+     * @param color    the color of the grid
+     */
+    public void  printGrid (int interval, Color color){
+        if (this.imageWriter == null) {
+            throw new MissingResourceException("Renderer resource not set", "Render", "Image writer");
+        }
+        int nX = imageWriter.getNx();
+        int nY = imageWriter.getNy();
+        for (int row = 0; row < nY; row++) {
+            for (int col = 0; col < nX; col++) {
+                if (row % interval == 0 || col % interval == 0) {
+                    imageWriter.writePixel(row, col, color);
+                }
+            }
+        }
+    }
+    /**
+     * If the imageWriter is not null, write to the image.
+     */
+    public void writeToImage() {
+        if (this.imageWriter == null) {
+            throw new MissingResourceException("Renderer resource not set", "Render", "Image writer");
+        }
+        this.imageWriter.writeToImage();
+    }
+
 }
