@@ -4,26 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<<<< Temporary merge branch 1
-    <list default="true" id="c3e67677-4ebc-40d9-a2e9-bfbaae20e07d" name="Changes" comment="start of level 3 - intersection's">
-=========
-    <list default="true" id="c3e67677-4ebc-40d9-a2e9-bfbaae20e07d" name="Changes" comment="level 3 A - intersection's - nadav">
-      <change afterPath="$PROJECT_DIR$/src/geometries/Geometries.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/geometries/GeometriesTestss.java" afterDir="false" />
->>>>>>>>> Temporary merge branch 2
+    <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/primitives/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_2_2023_7_56_AM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_2_2023_7_56_AM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Intersectable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Intersectable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Plane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Plane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Polygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Polygon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/RadialGeometry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/RadialGeometry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/geometries/Sphere.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Sphere.java" afterDir="false" />
-<<<<<<<<< Temporary merge branch 1
-      <change beforePath="$PROJECT_DIR$/src/primitives/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
-=========
       <change beforePath="$PROJECT_DIR$/src/geometries/Tube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Tube.java" afterDir="false" />
->>>>>>>>> Temporary merge branch 2
-      <change beforePath="$PROJECT_DIR$/unitTests/geometries/PlaneTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/PlaneTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/geometries/PolygonTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/geometries/PolygonTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/renderer/IntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/IntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,13 +96,16 @@
       <recent name="primitives" />
     </key>
   </component>
-<<<<<<<<< Temporary merge branch 1
-  <component name="RunManager" selected="JUnit.PolygonTests">
-    <configuration name="PlaneTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-=========
-  <component name="RunManager" selected="JUnit.All in ISE5783_1997_1609">
+  <component name="RunManager" selected="JUnit.All in ISE5783_1997_1609 (1)">
+    <configuration name="All in ISE5783_1997_1609 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_1997_1609" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in ISE5783_1997_1609" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
->>>>>>>>> Temporary merge branch 2
       <module name="ISE5783_1997_1609" />
       <extension name="coverage">
         <pattern>
@@ -123,38 +116,6 @@
       <option name="PACKAGE_NAME" value="geometries" />
       <option name="MAIN_CLASS_NAME" value="geometries.PlaneTests" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PlaneTests.findIntersections" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_1997_1609" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="geometries.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="geometries" />
-      <option name="MAIN_CLASS_NAME" value="geometries.PlaneTests" />
-      <option name="METHOD_NAME" value="findIntersections" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PlaneTests.findIntersections2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_1997_1609" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="geometries.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="geometries" />
-      <option name="MAIN_CLASS_NAME" value="geometries.PlaneTests" />
-      <option name="METHOD_NAME" value="findIntersections2" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -174,7 +135,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PlaneTests.findIntersections" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PlaneTests.findIntersections2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1997_1609" />
       <extension name="coverage">
         <pattern>
@@ -184,7 +145,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="geometries" />
       <option name="MAIN_CLASS_NAME" value="geometries.PlaneTests" />
-      <option name="METHOD_NAME" value="findIntersections" />
+      <option name="METHOD_NAME" value="findIntersections2" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -201,6 +162,22 @@
       <option name="PACKAGE_NAME" value="geometries" />
       <option name="MAIN_CLASS_NAME" value="geometries.PlaneTests" />
       <option name="METHOD_NAME" value="findIntersections2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlaneTests.findIntersections" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_1997_1609" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="geometries.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="geometries" />
+      <option name="MAIN_CLASS_NAME" value="geometries.PlaneTests" />
+      <option name="METHOD_NAME" value="findIntersections" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -223,18 +200,11 @@
     </configuration>
     <recent_temporary>
       <list>
-<<<<<<<<< Temporary merge branch 1
-=========
+        <item itemvalue="JUnit.All in ISE5783_1997_1609 (1)" />
         <item itemvalue="JUnit.All in ISE5783_1997_1609" />
->>>>>>>>> Temporary merge branch 2
         <item itemvalue="JUnit.PolygonTests" />
         <item itemvalue="JUnit.PlaneTests.findIntersections2" />
         <item itemvalue="JUnit.PlaneTests" />
-        <item itemvalue="JUnit.PlaneTests.findIntersections" />
-<<<<<<<<< Temporary merge branch 1
-        <item itemvalue="JUnit.PlaneTests.testFindIntsersections" />
-=========
->>>>>>>>> Temporary merge branch 2
       </list>
     </recent_temporary>
   </component>
@@ -345,9 +315,6 @@
       <option name="project" value="LOCAL" />
       <updated>1682321697738</updated>
     </task>
-<<<<<<<<< Temporary merge branch 1
-    <option name="localTasksCounter" value="15" />
-=========
     <task id="LOCAL-00015" summary="level 3 A - intersection's - nadav">
       <created>1682675713626</created>
       <option name="number" value="00015" />
@@ -356,7 +323,6 @@
       <updated>1682675713626</updated>
     </task>
     <option name="localTasksCounter" value="16" />
->>>>>>>>> Temporary merge branch 2
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -382,12 +348,8 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
     <MESSAGE value="start of level 3 - intersection's" />
-<<<<<<<<< Temporary merge branch 1
-    <option name="LAST_COMMIT_MESSAGE" value="start of level 3 - intersection's" />
-=========
     <MESSAGE value="level 3 A - intersection's - nadav" />
     <option name="LAST_COMMIT_MESSAGE" value="level 3 A - intersection's - nadav" />
->>>>>>>>> Temporary merge branch 2
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -395,7 +357,7 @@
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/geometries/Polygon.java</url>
           <line>87</line>
-          <properties class="geometries.Polygon" method="findIntsersections">
+          <properties class="geometries.Polygon" method="findIntersections">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>

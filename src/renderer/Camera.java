@@ -54,47 +54,53 @@ public class Camera {
 
     /**
      * Camera constructor
-     * @param p0 the camera's location
+     *
+     * @param p0  the camera's location
      * @param vTo the vector that point to the view plane
      * @param vUp the vector that point up
      */
     public Camera(Point p0, Vector vTo, Vector vUp) {
-        if (!isZero( vUp.dotProduct(vTo)))
+        if (!isZero(vUp.dotProduct(vTo)))
             throw new IllegalArgumentException("vUp and vTo are not orthogonal");
-        else {
-            this.p0 = p0;
-            this.vUp = vUp.normalize();
-            this.vTo = vTo.normalize();
-            this.vRight = vTo.crossProduct(vUp).normalize();
-        }
+
+        this.p0 = p0;
+        this.vUp = vUp.normalize();
+        this.vTo = vTo.normalize();
+        this.vRight = vTo.crossProduct(vUp);
+
     }
+
     /**
      * set the view plane size
-     * @param width the width of the view plane
+     *
+     * @param width  the width of the view plane
      * @param height the height of the view plane
      * @return the camera
      */
-    public Camera setVPSize(double width, double height){
+    public Camera setVPSize(double width, double height) {
         this.width = width;
         this.height = height;
-        return  this;
+        return this;
     }
+
     /**
      * set the distance between the camera and the view plane
+     *
      * @param distance the distance between the camera and the view plane
      * @return the camera
      */
-    public Camera setVPDistance(double distance){
+    public Camera setVPDistance(double distance) {
         this.distance = distance;
         return this;
     }
 
     /**
      * construct a ray from the camera to the view plane
+     *
      * @param nX the number of pixels in the width of the view plane
      * @param nY the number of pixels in the height of the view plane
-     * @param j the index of the pixel in the width of the view plane
-     * @param i the index of the pixel in the height of the view plane
+     * @param j  the index of the pixel in the width of the view plane
+     * @param i  the index of the pixel in the height of the view plane
      * @return the ray from the camera to the view plane
      */
     public Ray constructRay(int nX, int nY, int j, int i) {
@@ -111,8 +117,11 @@ public class Camera {
         double Xj = (j - (nX - 1) / 2d) * Rx;
         double Yi = -(i - (nY - 1) / 2d) * Ry;
 
-        if (!isZero(Xj)) Pij = Pij.add(vRight.scale(Xj));
-        if (!isZero(Yi)) Pij = Pij.add(vUp.scale(Yi));
+        //moving on the view-plane according to delta values if necessary
+        if (!isZero(Xj))
+            Pij = Pij.add(vRight.scale(Xj));
+        if (!isZero(Yi))
+            Pij = Pij.add(vUp.scale(Yi));
 
         // vector from camera's eye in the direction of point(i,j) in the view plane
         Vector Vij = Pij.subtract(p0);

@@ -34,9 +34,9 @@ import static org.junit.jupiter.api.Assertions.*;
         }
         assertEquals(expected, res, msg);
     }
-    /**
-     * Integration test for camera and sphere
-     */
+     /**
+      * Integration test for camera and sphere
+      */
     @Test
     public void sphere_camera_intersections() {
         Camera camera1 = new Camera(new Point(0,0,0), new Vector(0,0,-1), new Vector(0,-1,0))
@@ -109,6 +109,6 @@ import static org.junit.jupiter.api.Assertions.*;
                 new Point(0,20,-2),
                 new Point(1,-1,-2),
                 new Point(-1,-1,-2));
-        integration_Helper(camera, triangle, 2, "2 intersections expected at the middle cell and above ");
+        integration_Helper(camera, triangle, 2, "2 intersections expected at the middle cell and above");
     }
 }
