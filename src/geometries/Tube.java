@@ -24,8 +24,6 @@ public class Tube extends RadialGeometry{
      */
     public Tube(Ray axisRay, double radius) {
         super(radius);
-        if(radius<=0)
-            throw new IllegalArgumentException("This radius is not legal!");
         this.axisRay = axisRay;
     }
 

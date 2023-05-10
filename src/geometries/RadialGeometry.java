@@ -13,6 +13,9 @@ public abstract class RadialGeometry implements Geometry{
      * @param radius The radius value of the RadialGeometry object.
      */
     public RadialGeometry(double radius) {
+        if(radius<=0)
+            throw new IllegalArgumentException("This radius is not legal!");
+
         this.radius = radius;
     }
 }

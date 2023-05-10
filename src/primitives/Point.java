@@ -9,10 +9,11 @@ import java.util.Objects;
  */
 public class Point {
 
+    public static final Point ZERO = new Point(0, 0, 0);
     /**
      * The coordinates of this Point object.
      */
-    final Double3 xyz;
+    final protected Double3 xyz;
 
     /**
      * Constructs a new Point object with the specified x, y, and z coordinates.
