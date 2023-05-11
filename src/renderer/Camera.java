@@ -172,14 +172,19 @@ public class Camera {
             for (int row = 0; row < nY; row++) {
                 for (int col = 0; col < nX; col++) {
                     castRay(nX, nY, row, col);
-                    this.imageWriter.writePixel(col, row, pixelColor);
-
+//                    this.imageWriter.writePixel(col, row, pixelColor);
                 }
             }
 
         } catch (MissingResourceException e) {
             throw new UnsupportedOperationException("Not yet initialized" + e.getClassName());
         }
+    }
+
+    private void castRay(int nX, int nY, int row, int col) {
+        Ray ray =  this.constructRay(nX, nY, row, col);
+        Color pixelCol = this.rayTracer.traceRay(ray);
+        imageWriter.writePixel(row, col, pixelCol);
     }
 
     /**

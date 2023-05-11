@@ -5,6 +5,7 @@ import geometries.Geometries;
 import primitives.Color;
 
 
+
 public class Scene {
 
     public String name;
@@ -23,14 +24,13 @@ public class Scene {
         geometries = builder.geometries;
     }
 
-
     /**
      * inner class SceneBuilder builds Scene object using builder pattern
      */
     public static class SceneBuilder {
 
         public  String name;
-        public Color background = Color.BLACK;;
+        public Color background = Color.BLACK;
         public AmbientLight ambientLight = new AmbientLight();
         public Geometries geometries = new Geometries();
 
