@@ -1,9 +1,27 @@
 package scene;
 
+import geometries.Sphere;
+import geometries.Triangle;
 import lighting.AmbientLight;
 import geometries.Geometries;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 import primitives.Color;
+import primitives.Double3;
+import primitives.Point;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+
+import static Parser.Utils.makePointFromString;
+import static Parser.Utils.mapStringToDouble;
+import static org.junit.jupiter.api.Assertions.fail;
 
 
 public class Scene {
@@ -85,6 +103,71 @@ public class Scene {
          */
         public Scene build() {
             return new Scene(this);
+        }
+
+        public SceneBuilder XmlScene (File file){
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder;
+            Document doc = null;
+            try {
+                dBuilder = dbFactory.newDocumentBuilder();
+                doc = dBuilder.parse(file);
+            } catch (ParserConfigurationException e) {
+                fail("ParserConfigurationException");
+            } catch (SAXException e) {
+                fail("SAXException");
+            } catch (IOException e) {
+                fail("IOException");
+            }
+            doc.getDocumentElement().normalize();
+
+            Element root = doc.getDocumentElement();
+
+            String[] backgroundColorString = root.getAttribute("background-color").split(" ");
+            double[] backgroundColorDouble = mapStringToDouble(backgroundColorString);
+            Color backgroundColor = new Color(backgroundColorDouble[0], backgroundColorDouble[1], backgroundColorDouble[2]);
+            this.setBackground(backgroundColor);
+
+            Element ambientLightElement = (Element) root.getElementsByTagName("ambient-light").item(0);
+            String[] ambientLightString = ambientLightElement.getAttribute("color").split(" ");
+            double[] ambientLightDouble = mapStringToDouble(ambientLightString);
+            Color ambientLightColor = new Color(ambientLightDouble[0], ambientLightDouble[1], ambientLightDouble[2]);
+            AmbientLight ambientLight = new AmbientLight(ambientLightColor, new Double3(1, 1, 1));
+            this.setAmbientLight(ambientLight);
+
+            Geometries geometries = new Geometries();
+            Node geometriesNode = root.getElementsByTagName("geometries").item(0);
+            NodeList geometriesNodes = geometriesNode.getChildNodes();
+            for (int i = 0; i < geometriesNodes.getLength(); i++) {
+                Node geometryNode = geometriesNodes.item(i);
+                if (geometryNode.getNodeType() != Node.ELEMENT_NODE) {
+                    continue;
+                }
+                Element geometryElement = (Element) geometryNode;
+                switch (geometryElement.getNodeName()) {
+                    case "sphere" -> {
+                        String centerString = geometryElement.getAttribute("center");
+                        Point center = makePointFromString(centerString);
+                        Double radius = Double.parseDouble(geometryElement.getAttribute("radius"));
+                        Sphere sphere = new Sphere(center, radius);
+                        geometries.add(sphere);
+                    }
+                    case "triangle" -> {
+                        String p0String = geometryElement.getAttribute("p0");
+                        Point p0 = makePointFromString(p0String);
+                        String p1String = geometryElement.getAttribute("p1");
+                        Point p1 = makePointFromString(p1String);
+                        String p2String = geometryElement.getAttribute("p2");
+                        Point p2 = makePointFromString(p2String);
+                        Triangle triangle = new Triangle(p0, p1, p2);
+                        geometries.add(triangle);
+                    }
+                    default -> {
+                    }
+                }
+            }
+            this.setGeometries(geometries);
+            return this;
         }
     }
 }
