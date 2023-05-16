@@ -105,6 +105,12 @@ public class Scene {
             return new Scene(this);
         }
 
+        /**
+         * This function builds a scene from an xml file.
+         *
+         * @param file The xml file.
+         * @return The SceneBuilder object.
+         */
         public SceneBuilder XmlScene (File file){
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder;
