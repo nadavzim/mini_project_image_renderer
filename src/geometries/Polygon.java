@@ -13,7 +13,7 @@ import static primitives.Util.isZero;
 /** Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
  * system
  * @author Dan */
-public class Polygon implements Geometry {
+public class Polygon extends Geometry {
    /** List of polygon's vertices */
    protected final List<Point> vertices;
    /** Associated plane in which the polygon lays */
@@ -82,15 +82,13 @@ public class Polygon implements Geometry {
 
    @Override
    public Vector getNormal(Point point) { return plane.getNormal(); }
-
-
    @Override
-   public List<Point> findIntersections(Ray ray) {
+   public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
 
       int len = vertices.size();
       Point p0 = ray.getP0();
       Vector v = ray.getDir();
-      List<Vector> vectors = new ArrayList<Vector>(len);
+      List<Vector> vectors = new ArrayList<>(len);
 
       //all the vectors
       for (Point vertex : vertices) {
@@ -109,6 +107,6 @@ public class Polygon implements Geometry {
          if (!checkSign(sign,dotProd) || isZero(dotProd))
             return null;
       }
-      return plane.findIntersections(ray);
+      return plane.findGeoIntersectionsHelper(ray);
    }
 }

@@ -48,9 +48,10 @@ public class Triangle extends Polygon {
      * @param ray the Ray to test for intersection with the Triangle object.
      * @return a List of Point objects representing the intersection points, or an empty list if no intersections  found.
      */
+
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        List<Point> result =plane.findIntersections(ray);
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> result =plane.findGeoIntersectionsHelper(ray);
         if(result == null)
             return null;
 
@@ -77,7 +78,7 @@ public class Triangle extends Polygon {
         {
             return result;
         }
-        return super.findIntersections(ray);
+        return super.findGeoIntersectionsHelper(ray);
     }
     
 }

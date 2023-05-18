@@ -6,12 +6,13 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-public class Plane implements Geometry {
+public class Plane extends Geometry {
     /**
      * The base point of the plane.
      */
@@ -71,28 +72,23 @@ public class Plane implements Geometry {
     }
 
     @Override
-    public List<Point> findIntersections(Ray ray) {
-        // plane: q0 normal
-        // ray  : p0 dir
-        Point p0 = ray.getP0();
-        Vector v = ray.getDir();
-
-        // if the ray start at the plane
-        if (p0.equals(q0))
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        if (this.q0.equals(ray.getP0())) {
             return null;
-
-        Vector p0Q0 = q0.subtract(p0);
-        double nv = normal.dotProduct(v);
-
-        if (isZero(nv))
+        }
+        double nv = this.normal.dotProduct(ray.getDir());
+        if (isZero(nv)) {
             return null;
-
-        double t = normal.dotProduct(p0Q0) / nv;
-
-        if (isZero(t) || t < 0)
-            return null;
-
-        return List.of(ray.getPoint(t));
+        }
+        double nQMinusP0 = this.normal.dotProduct(this.q0.subtract(ray.getP0()));
+        double t = alignZero(nQMinusP0 / nv);
+        if (t > 0) {
+            List<GeoPoint> points = new ArrayList<>(1);
+            Point p = ray.getPoint(t);
+            points.add(new GeoPoint(this, p));
+            return points;
+        }
+        return null;
     }
 }
 

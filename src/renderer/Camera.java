@@ -171,8 +171,8 @@ public class Camera {
 
             for (int row = 0; row < nY; row++) {
                 for (int col = 0; col < nX; col++) {
-                    castRay(nX, nY, row, col);
-//                    this.imageWriter.writePixel(col, row, pixelColor);
+                    Color color = castRay(nX, nY, row, col);
+                    this.imageWriter.writePixel(row, col, color);
                 }
             }
 
@@ -181,10 +181,18 @@ public class Camera {
         }
     }
 
-    private void castRay(int nX, int nY, int row, int col) {
-        Ray ray =  this.constructRay(nX, nY, row, col);
-        Color pixelCol = this.rayTracer.traceRay(ray);
-        imageWriter.writePixel(row, col, pixelCol);
+    /**
+     * construct a ray from the camera throu a specific pixel in the View Plane
+     * and get the color of the pixel
+     * @param nX how many pixels are in the X dim
+     * @param nY how many pixels are in the Y dim
+     * @param j the pixel to go throu X dim
+     * @param i the pixel to go throu Y dim
+     * @return the color of the pixel
+     */
+    private Color castRay(int nX, int nY, int j, int i) {
+        Ray ray = this.constructRay(nX, nY, j, i);
+        return rayTracer.traceRay(ray);
     }
 
     /**
