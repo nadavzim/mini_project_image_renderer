@@ -8,9 +8,6 @@
 //    }
 //}
 
-/**
- A class representing a triangle in a three-dimensional space.
- */
 package geometries;
 import primitives.Point;
 import primitives.Vector;
@@ -18,6 +15,9 @@ import primitives.Ray;
 import java.util.List;
 
 
+/**
+ A class representing a triangle in a three-dimensional space.
+ */
 public class Triangle extends Polygon {
     /**
      * Constructs a triangle object with the given three vertices.
@@ -51,12 +51,12 @@ public class Triangle extends Polygon {
 
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        List<GeoPoint> result =plane.findGeoIntersectionsHelper(ray);
-        if(result == null)
+        List<GeoPoint> result = plane.findGeoIntersectionsHelper(ray);
+        if (result == null)
             return null;
 
-        Point P0=ray.getP0();
-        Vector v=ray.getDir();
+        Point P0 = ray.getP0();
+        Vector v = ray.getDir();
 
         Point p1 = vertices.get(0);
         Point p2 = vertices.get(1);
@@ -74,11 +74,10 @@ public class Triangle extends Polygon {
         double s2 = v.dotProduct(n2);
         double s3 = v.dotProduct(n3);
 
-        if((s1>0 && s2>0 && s3>0 )|| (s1<0 && s2<0 && s3<0))
-        {
-            return result;
+        if ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) {
+            Point point = result.get(0).point;
+            return List.of(new GeoPoint(this, point));
         }
-        return super.findGeoIntersectionsHelper(ray);
+        return null;
+        }
     }
-    
-}
