@@ -4,6 +4,7 @@ import geometries.Sphere;
 import geometries.Triangle;
 import lighting.AmbientLight;
 import geometries.Geometries;
+import lighting.LightSource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -18,6 +19,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static Parser.Utils.makePointFromString;
 import static Parser.Utils.mapStringToDouble;
@@ -30,6 +33,8 @@ public class Scene {
     public Color background;
     public AmbientLight ambientLight;
     public Geometries geometries;
+    List<LightSource> lights = new ArrayList<>();
+
 
     /**
      *
@@ -40,7 +45,56 @@ public class Scene {
         background = builder.background;
         ambientLight = builder.ambientLight;
         geometries = builder.geometries;
+
     }
+
+
+
+    /**
+     * Getter for the name of the scene.
+     *
+     * @return The name of the scene.
+     */
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Getter for the background of the scene.
+     *
+     * @return The background color of the scene.
+     */
+    public Color getBackground() {
+        return this.background;
+    }
+
+    /**
+     * Getter for the ambient light of the scene.
+     *
+     * @return The ambient light.
+     */
+    public AmbientLight getAmbientLight() {
+        return this.ambientLight;
+    }
+
+    /**
+     * Getter for the geometries structures in the scene.
+     *
+     * @return The geometries object.
+     */
+    public Geometries getGeometries() {
+        return this.geometries;
+    }
+
+    /**
+     * Getter for the lights in the scene.
+     *
+     * @return The lights.
+     */
+    public List<LightSource> getLights() {
+        return this.lights;
+    }
+
 
     /**
      * inner class SceneBuilder builds Scene object using builder pattern
@@ -51,6 +105,8 @@ public class Scene {
         public Color background = Color.BLACK;
         public AmbientLight ambientLight = new AmbientLight();
         public Geometries geometries = new Geometries();
+        public List<LightSource> lights = new ArrayList<>();
+
 
         /**
          * This is the builder
@@ -93,6 +149,11 @@ public class Scene {
          */
         public SceneBuilder setGeometries(Geometries geometries) {
             this.geometries = geometries;
+            return this;
+        }
+
+        public SceneBuilder setLights(List<LightSource> lights) {
+            this.lights = lights;
             return this;
         }
 

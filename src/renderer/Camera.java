@@ -158,7 +158,7 @@ public class Camera {
     /**
      *  The function iterates over all the pixels in the image and casts a ray through each pixel
      */
-    public void renderImage() {
+    public Camera renderImage() {
         try {
             if (imageWriter == null) {
                 throw new MissingResourceException("Renderer resource not set", ImageWriter.class.getName(), "");
@@ -179,6 +179,7 @@ public class Camera {
         } catch (MissingResourceException e) {
             throw new UnsupportedOperationException("Not yet initialized" + e.getClassName());
         }
+        return this;
     }
 
     /**
