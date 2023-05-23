@@ -4,27 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="level 4 - camera intersections. finish camera, triangle tests and half of sphere tests. nadav">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_21_2023_4_59_AM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_21_2023_4_59_AM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/base render test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/color render test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/nadav debug render test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/xml render test.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/yellow submarine.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lighting/Light.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lighting/LightSource.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lighting/PointLight.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lighting/SpotLight.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/primitives/Material.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/lighting/LightsTests.java" afterDir="false" />
+    <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="Beginning of step 6 adding light sources and tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/geometries/Geometry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Geometry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lighting/AmbientLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/AmbientLight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene/Scene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/lighting/LightsTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/lighting/LightsTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -310,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683646545287</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Beginning of step 6 adding light sources and tests">
+      <created>1684862383467</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1684862383467</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -337,7 +327,8 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
     <MESSAGE value="start of level 3 - intersection's" />
     <MESSAGE value="level 3 A - intersection's - nadav" />
-    <option name="LAST_COMMIT_MESSAGE" value="level 3 A - intersection's - nadav" />
+    <MESSAGE value="Beginning of step 6 adding light sources and tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Beginning of step 6 adding light sources and tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -350,15 +341,6 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/renderer/RayTracerBasic.java</url>
-          <line>26</line>
-          <properties class="renderer.RayTracerBasic" method="traceRay">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="16" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
