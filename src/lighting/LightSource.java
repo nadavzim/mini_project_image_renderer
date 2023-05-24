@@ -4,7 +4,7 @@ import primitives.Point;
 import primitives.Vector;
 
 
-public class LightSource {
+public interface LightSource {
     /**
      * Returns the intensity of the light at the given point.
      *
