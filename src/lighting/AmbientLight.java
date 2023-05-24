@@ -28,10 +28,10 @@ public class AmbientLight extends Light{
      * constructor
      * @param color the color of the light
      */
-    public AmbientLight() {
+    //public AmbientLight() {
 
-        super(Color.BLACK);
-    }
+      //  super(Color.BLACK);
+    //}
 
     /**
      * getter

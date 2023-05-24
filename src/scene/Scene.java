@@ -45,6 +45,7 @@ public class Scene {
         background = builder.background;
         ambientLight = builder.ambientLight;
         geometries = builder.geometries;
+        lights = builder.lights;
 
     }
 
@@ -103,7 +104,7 @@ public class Scene {
 
         public  String name;
         public Color background = Color.BLACK;
-        public AmbientLight ambientLight = new AmbientLight();
+        public AmbientLight ambientLight = AmbientLight.NONE;
         public Geometries geometries = new Geometries();
         public List<LightSource> lights = new ArrayList<>();
 
