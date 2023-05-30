@@ -24,17 +24,4 @@ public class AmbientLight extends Light{
     public AmbientLight(Color color, double kA) {
         super(color.scale(kA));
     }
-    /**
-     * constructor
-     * @param color the color of the light
-     */
-    //public AmbientLight() {
-
-      //  super(Color.BLACK);
-    //}
-
-    /**
-     * getter
-     * @return the intensity of the light
-     */
 }

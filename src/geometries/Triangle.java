@@ -50,37 +50,37 @@ public class Triangle extends Polygon {
      * @param ray the Ray to test for intersection with the Triangle object.
      * @return a List of Point objects representing the intersection points, or an empty list if no intersections  found.
      */
-
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
-        List<GeoPoint> result = plane.findGeoIntersectionsHelper(ray, maxDistance);
-        if (result == null)
+        // Gets all intersections with the plane
+        var result = plane.findGeoIntersections(ray, maxDistance);
+
+        // if there is no intersections with the whole plane,
+        // then is no intersections with the triangle
+        if (result == null) {
             return null;
+        }
 
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
 
-        Point p1 = vertices.get(0);
-        Point p2 = vertices.get(1);
-        Point p3 = vertices.get(2);
+        Vector v1 = this.vertices.get(0).subtract(P0),
+                v2 = this.vertices.get(1).subtract(P0),
+                v3 = this.vertices.get(2).subtract(P0);
 
-        Vector v1 = p1.subtract(P0);//(P0->p1)
-        Vector v2 = p2.subtract(P0);//(P0->p2)
-        Vector v3 = p3.subtract(P0);//(P0->p3)
+        Vector n1 = v1.crossProduct(v2).normalize(),
+                n2 = v2.crossProduct(v3).normalize(),
+                n3 = v3.crossProduct(v1).normalize();
 
-        Vector n1 = v1.crossProduct(v2);
-        Vector n2 = v2.crossProduct(v3);
-        Vector n3 = v3.crossProduct(v1);
+        double a = alignZero(v.dotProduct(n1)),
+                b = alignZero(v.dotProduct(n2)),
+                c = alignZero(v.dotProduct(n3));
 
-        double s1 = v.dotProduct(n1);
-        double s2 = v.dotProduct(n2);
-        double s3 = v.dotProduct(n3);
+        // if all the points have the same sign(+/-),
+        // all the points are inside the triangle
+        if (a < 0 && b < 0 && c < 0 || a > 0 && b > 0 && c > 0)
+            return List.of(new GeoPoint(this,result.get(0).point));
 
-        if ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) {
-            Point point = result.get(0).point;
-            if (alignZero(point.distanceSquared(ray.getP0())-maxDistance*maxDistance) <= 0)
-                return List.of(new GeoPoint(this, point));
-        }
         return null;
-        }
+    }
     }

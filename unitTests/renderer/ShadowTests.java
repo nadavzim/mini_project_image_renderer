@@ -7,7 +7,6 @@ import static java.awt.Color.*;
 import geometries.*;
 import lighting.*;
 import primitives.*;
-import renderer.*;
 import scene.Scene;
 
 /** Testing basic shadows
@@ -78,7 +77,7 @@ public class ShadowTests {
                            new Point(-76, -76, 70));
    }
 
-   /** Produce a picture of a two triangles lighted by a spot light with a Sphere
+   /** Produce a picture of two triangles lighted by a spotlight with a Sphere
     * producing a shading */
    @Test
    public void trianglesSphere() {

@@ -73,12 +73,12 @@ public class Sphere extends RadialGeometry {
         List<GeoPoint> points = new ArrayList<>(size);
         if (t1 > 0) {
             Point p = ray.getPoint(t1);
-            if (alignZero(p.distanceSquared(ray.getP0())-maxDistance*maxDistance) <= 0)
+            if (alignZero(p.distance(ray.getP0())-maxDistance) <= 0)
                 points.add(new GeoPoint(this, p));
         }
         if (t2 > 0) {
             Point p = ray.getPoint(t2);
-            if (alignZero(p.distanceSquared(ray.getP0())-maxDistance*maxDistance) <= 0)
+            if (alignZero(p.distance(ray.getP0())-maxDistance) <= 0)
                 points.add(new GeoPoint(this, p));
         }
         return points;

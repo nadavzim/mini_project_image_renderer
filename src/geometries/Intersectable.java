@@ -7,7 +7,7 @@ import java.util.Objects;
 
 
 /**
- * The Intersectable interface defines an objects that can be intersected by a ray in 3D space.
+ * The Intersect interface defines an objects that can be intersected by a ray in 3D space.
  */
 public abstract class Intersectable {
     public static class GeoPoint {
@@ -39,14 +39,32 @@ public abstract class Intersectable {
     public final List<GeoPoint> findGeoIntersections(Ray ray) {
         return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
     }
-    protected abstract List<GeoPoint>
-    findGeoIntersectionsHelper(Ray ray, double maxDistance);
+
+    /**
+     Helper method for finding geometric intersections between a ray and the object.
+     This method is implemented by subclasses of Geometry.
+     @param ray The Ray representing the ray to intersect with the object.
+     @param maxDistance The maximum distance to search for intersections.
+     @return A List of GeoPoint objects representing the geometric intersections found.
+     */
+    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance);
 
 
-
+    /**
+     Finds geometric intersections between a ray and the object using the helper method.
+     @param ray The Ray representing the ray to intersect with the object.
+     @param maxDistance The maximum distance to search for intersections.
+     @return A List of GeoPoint objects representing the geometric intersections found.
+     */
     public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
         return findGeoIntersectionsHelper(ray, maxDistance);
     }
+
+    /**
+     Finds intersections between a ray and the object, returning a list of points.
+     @param ray The Ray representing the ray to intersect with the object.
+     @return A List of Point objects representing the intersections found.
+     */
     public List<Point> findIntersections(Ray ray) {
         var geoList = findGeoIntersections(ray);
         return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();

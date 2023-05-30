@@ -78,7 +78,7 @@ public class LightsTests {
    }
 
    /**
-    * Produce a picture of a sphere lighted by a spot light
+    * Produce a picture of a sphere lighted by a spotlight
     */
    @Test
    public void sphereSpot() {
@@ -93,7 +93,7 @@ public class LightsTests {
    }
 
    /**
-    * Produce a picture of a two triangles lighted by a directional light
+    * Produce a picture of two triangles lighted by a directional light
     */
    @Test
    public void trianglesDirectional() {
@@ -108,7 +108,7 @@ public class LightsTests {
    }
 
    /**
-    * Produce a picture of a two triangles lighted by a point light
+    * Produce a picture of two triangles lighted by a point light
     */
    @Test
    public void trianglesPoint() {
@@ -123,7 +123,7 @@ public class LightsTests {
    }
 
    /**
-    * Produce a picture of a two triangles lighted by a spot light
+    * Produce a picture of two triangles lighted by a spotlight
     */
    @Test
    public void trianglesSpot() {
@@ -138,7 +138,7 @@ public class LightsTests {
    }
 
    /**
-    * Produce a picture of a sphere lighted by a narrow spot light
+    * Produce a picture of a sphere lighted by a narrow spotlight
     */
    @Test
    public void sphereSpotSharp() {
@@ -154,7 +154,7 @@ public class LightsTests {
    }
 
    /**
-    * Produce a picture of a two triangles lighted by a narrow spot light
+    * Produce a picture of two triangles lighted by a narrow spotlight
     */
    @Test
    public void trianglesSpotSharp() {
