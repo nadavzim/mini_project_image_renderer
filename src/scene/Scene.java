@@ -96,6 +96,10 @@ public class Scene {
         return this.lights;
     }
 
+    public void setAmbientLight(AmbientLight ambientLight) {
+        this.ambientLight = ambientLight;
+    }
+
 
     /**
      * inner class SceneBuilder builds Scene object using builder pattern
