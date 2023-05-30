@@ -8,6 +8,8 @@ package primitives;
 public class Material {
     private Double3 Kd = Double3.ZERO;  // diffuse
     private Double3 Ks = Double3.ZERO;  // specular
+    private Double3 Kr = Double3.ZERO;  // reflection
+    private Double3 Kt = Double3.ZERO;  // transparency
     private int nShininess = 0;  // shininess
 
     /**
@@ -80,6 +82,36 @@ public class Material {
         this.Ks = Ks;
         return this;
     }
+    public Material setKt(double Kt) {
+        this.Kt = new Double3(Kt);
+        return this;
+    }
+
+    /**
+     * Setter for the Kt field.
+     *
+     * @param Kt specular reflectivity
+     * @return The material itself.
+     */
+    public Material setKt(Double3 Kt) {
+        this.Kt = Kt;
+        return this;
+    }
+    public Material setKr(double Kr) {
+        this.Kr = new Double3(Kr);
+        return this;
+    }
+
+    /**
+     * Setter for the Kr field.
+     *
+     * @param Kr specular reflectivity
+     * @return The material itself.
+     */
+    public Material setKr(Double3 Kr) {
+        this.Kr = Kr;
+        return this;
+    }
 
     /**
      * Setter for the nShininess field.
@@ -92,5 +124,11 @@ public class Material {
         return this;
     }
 
+    public Double3 getKr() {
+        return Kr;
+    }
 
+    public Double3 getKt() {
+        return Kt;
+    }
 }

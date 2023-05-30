@@ -1,0 +1,190 @@
+Index: src/geometries/Geometries.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package geometries;\r\nimport java.util.Arrays;\r\nimport primitives.Ray;\r\n\r\nimport java.util.LinkedList;\r\nimport java.util.List;\r\n\r\npublic class Geometries extends Intersectable{\r\n    List<Intersectable> geometries;\r\n\r\n    public Geometries(Intersectable... geometries){\r\n        this.geometries = new LinkedList<>(Arrays.asList(geometries));\r\n    }\r\n    public Geometries(){\r\n        geometries = new LinkedList<>();\r\n    }\r\n    public void add(Intersectable... geometries){\r\n        this.geometries.addAll(Arrays.asList(geometries));\r\n    }\r\n\r\n    /**\r\n     * @param ray a ray to find intersections with.\r\n     * @return a list of points that are intersections of the ray and the geometries that in \"geometries\" list.\r\n     */\r\n    @Override\r\n    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {\r\n        List<GeoPoint> res = null;\r\n        for (Intersectable geometry : this.geometries) {\r\n            List<GeoPoint> resi = geometry.findGeoIntersections(ray, maxDistance);\r\n            if (resi != null) {\r\n                if (res == null) {\r\n                    res = new LinkedList<GeoPoint>();\r\n                }\r\n                res.addAll(resi);\r\n            }\r\n        }\r\n        return res;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/geometries/Geometries.java b/src/geometries/Geometries.java
+--- a/src/geometries/Geometries.java	(revision bca0d9a0fee3132073dbfc95b5153a87d1589984)
++++ b/src/geometries/Geometries.java	(date 1685476913709)
+@@ -6,7 +6,7 @@
+ import java.util.List;
+ 
+ public class Geometries extends Intersectable{
+-    List<Intersectable> geometries;
++    private List<Intersectable> geometries;
+ 
+     public Geometries(Intersectable... geometries){
+         this.geometries = new LinkedList<>(Arrays.asList(geometries));
+@@ -25,12 +25,11 @@
+     @Override
+     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+         List<GeoPoint> res = null;
+-        for (Intersectable geometry : this.geometries) {
+-            List<GeoPoint> resi = geometry.findGeoIntersections(ray, maxDistance);
++        for (var geometry : this.geometries) {
++            var resi = geometry.findGeoIntersections(ray, maxDistance);
+             if (resi != null) {
+-                if (res == null) {
+-                    res = new LinkedList<GeoPoint>();
+-                }
++                if (res == null)
++                    res = new LinkedList<>();
+                 res.addAll(resi);
+             }
+         }
+Index: src/geometries/Triangle.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//package geometries;\r\n//\r\n//import primitives.Point;\r\n//\r\n//public class Triangle extends Polygon {\r\n//    public Triangle(Point a, Point b, Point c) {\r\n//    super(a, b, c);\r\n//    }\r\n//}\r\n\r\npackage geometries;\r\nimport primitives.Point;\r\nimport primitives.Vector;\r\nimport primitives.Ray;\r\nimport java.util.List;\r\n\r\nimport static primitives.Util.alignZero;\r\n\r\n\r\n/**\r\n A class representing a triangle in a three-dimensional space.\r\n */\r\npublic class Triangle extends Polygon {\r\n    /**\r\n     * Constructs a triangle object with the given three vertices.\r\n     *\r\n     * @param a the first vertex of the triangle.\r\n     * @param b the second vertex of the triangle.\r\n     * @param c the third vertex of the triangle.\r\n     */\r\n    public Triangle(Point a, Point b, Point c) {\r\n        super(a, b, c);\r\n    }\r\n\r\n    /**\r\n     * calc the normal of the point on the triangle\r\n     *\r\n     * @param point the point on the geometry object\r\n     * @return the normal of the triangle\r\n     */\r\n    @Override\r\n    public Vector getNormal(Point point) {\r\n        return super.getNormal(point);\r\n    }\r\n\r\n\r\n    /**\r\n     * Finds the intersection points between the Triangle object and a given Ray.\r\n     *\r\n     * @param ray the Ray to test for intersection with the Triangle object.\r\n     * @return a List of Point objects representing the intersection points, or an empty list if no intersections  found.\r\n     */\r\n\r\n    @Override\r\n    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {\r\n        List<GeoPoint> result = plane.findGeoIntersectionsHelper(ray, maxDistance);\r\n        if (result == null)\r\n            return null;\r\n\r\n        Point P0 = ray.getP0();\r\n        Vector v = ray.getDir();\r\n\r\n        Point p1 = vertices.get(0);\r\n        Point p2 = vertices.get(1);\r\n        Point p3 = vertices.get(2);\r\n\r\n        Vector v1 = p1.subtract(P0);//(P0->p1)\r\n        Vector v2 = p2.subtract(P0);//(P0->p2)\r\n        Vector v3 = p3.subtract(P0);//(P0->p3)\r\n\r\n        Vector n1 = v1.crossProduct(v2);\r\n        Vector n2 = v2.crossProduct(v3);\r\n        Vector n3 = v3.crossProduct(v1);\r\n\r\n        double s1 = v.dotProduct(n1);\r\n        double s2 = v.dotProduct(n2);\r\n        double s3 = v.dotProduct(n3);\r\n\r\n        if ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) {\r\n            Point point = result.get(0).point;\r\n            if (alignZero(point.distanceSquared(ray.getP0())-maxDistance*maxDistance) <= 0)\r\n                return List.of(new GeoPoint(this, point));\r\n        }\r\n        return null;\r\n        }\r\n    }\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/geometries/Triangle.java b/src/geometries/Triangle.java
+--- a/src/geometries/Triangle.java	(revision bca0d9a0fee3132073dbfc95b5153a87d1589984)
++++ b/src/geometries/Triangle.java	(date 1685476092903)
+@@ -53,7 +53,7 @@
+ 
+     @Override
+     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+-        List<GeoPoint> result = plane.findGeoIntersectionsHelper(ray, maxDistance);
++        var result = plane.findGeoIntersections(ray, maxDistance);
+         if (result == null)
+             return null;
+ 
+@@ -68,18 +68,16 @@
+         Vector v2 = p2.subtract(P0);//(P0->p2)
+         Vector v3 = p3.subtract(P0);//(P0->p3)
+ 
+-        Vector n1 = v1.crossProduct(v2);
+-        Vector n2 = v2.crossProduct(v3);
+-        Vector n3 = v3.crossProduct(v1);
++        Vector n1 = v1.crossProduct(v2).normalize();
++        Vector n2 = v2.crossProduct(v3).normalize();
++        Vector n3 = v3.crossProduct(v1).normalize();
+ 
+-        double s1 = v.dotProduct(n1);
+-        double s2 = v.dotProduct(n2);
+-        double s3 = v.dotProduct(n3);
++        double s1 = alignZero(v.dotProduct(n1));
++        double s2 = alignZero(v.dotProduct(n2));
++        double s3 = alignZero(v.dotProduct(n3));
+ 
+         if ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) {
+-            Point point = result.get(0).point;
+-            if (alignZero(point.distanceSquared(ray.getP0())-maxDistance*maxDistance) <= 0)
+-                return List.of(new GeoPoint(this, point));
++            return List.of(new GeoPoint(this, result.get(0).point));
+         }
+         return null;
+         }
+Index: src/lighting/PointLight.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package lighting;\r\n\r\nimport primitives.Color;\r\nimport primitives.Point;\r\nimport primitives.Vector;\r\n\r\npublic class PointLight extends Light implements LightSource{\r\n\r\n    /**\r\n     * Returns the intensity of the light at the given point.\r\n     *\r\n     * @param p the point to get the intensity at\r\n     * @return the intensity of the light at the given point\r\n     */\r\n    private Point position;\r\n    private double kc = 1d;\r\n    private double kl = 0d;\r\n    private double kq = 0d;\r\n\r\n\r\n    public PointLight(Color intensity, Point position) {\r\n        super(intensity);\r\n        this.position = position;\r\n    }\r\n\r\n    public PointLight setKc(double kc) {\r\n        this.kc = kc;\r\n        return this;\r\n    }\r\n\r\n    public PointLight setKl(double kl) {\r\n        this.kl = kl;\r\n        return this;\r\n    }\r\n\r\n    public PointLight setKq(double kq) {\r\n        this.kq = kq;\r\n        return this;\r\n\r\n    }\r\n\r\n    /**\r\n     * Returns the intensity of the light at the given point.\r\n     *\r\n     * @param p the point to get the intensity at\r\n     * @return the intensity of the light at the given point\r\n     */\r\n    @Override\r\n    public Color getIntensity(Point p) {\r\n        double d = p.distance(position);\r\n        return getIntensity().scale(1/(kc + kl * d + kq * d * d));\r\n    }\r\n\r\n    /**\r\n     * Returns the vector from the light source to the given point.\r\n     *\r\n     * @param p the point to get the vector to\r\n     * @return the vector from the light source to the given point\r\n     */\r\n    @Override\r\n    public Vector getL(Point p) {\r\n        return p.subtract(position).normalize();\r\n    }\r\n\r\n    /**\r\n     * @param point\r\n     * @return\r\n     */\r\n    @Override\r\n    public double getDistance(Point point) {\r\n        return this.position.distanceSquared(point);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/lighting/PointLight.java b/src/lighting/PointLight.java
+--- a/src/lighting/PointLight.java	(revision bca0d9a0fee3132073dbfc95b5153a87d1589984)
++++ b/src/lighting/PointLight.java	(date 1685475473316)
+@@ -68,6 +68,6 @@
+      */
+     @Override
+     public double getDistance(Point point) {
+-        return this.position.distanceSquared(point);
++        return this.position.distance(point);
+     }
+ }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"0e31cecc-30d5-418a-833b-21c4a1f67da0\" name=\"Changes\" comment=\"start stage 7\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/base render test.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/color render test.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/lightSphereDirectional.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/lightSphereMultiple.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/lightSpherePoint.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/lightSphereSpot.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/lightSphereSpotSharp.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/lightTrianglesDirectional.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/lightTrianglesMultiple.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/lightTrianglesPoint.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/lightTrianglesSpot.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/lightTrianglesSpotSharp.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/xml render test.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/images/yellow submarine.png\" beforeDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/renderer/RayTracerBasic.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/renderer/RayTracerBasic.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/scene/Scene.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/scene/Scene.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"JUnit5 Test Class\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Pull.Settings\">\r\n    <option name=\"OPTIONS\">\r\n      <set>\r\n        <option value=\"NO_COMMIT\" />\r\n      </set>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">\r\n    <option name=\"selectedUrlAndAccountId\">\r\n      <UrlAndAccount>\r\n        <option name=\"accountId\" value=\"742174dc-3988-4b22-82ce-b83e682b9465\" />\r\n        <option name=\"url\" value=\"https://github.com/ynon123/ISE5783_1997_1609.git\" />\r\n      </UrlAndAccount>\r\n    </option>\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2MNCgOBzZmSUKtzElTGolxr0R7P\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,\r\n    &quot;OverrideImplement.generate.javadoc&quot;: &quot;true&quot;,\r\n    &quot;Repository.Attach.Annotations&quot;: &quot;true&quot;,\r\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\r\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,\r\n    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,\r\n    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,\r\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\r\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CreateClassDialog.RecentsKey\">\r\n      <recent name=\"scene\" />\r\n      <recent name=\"primitives\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\nadav\\OneDrive\\נדב\\מדעי המחשב מכון לב\\שנה ב\\סמסטר ב\\מבוא להנדסת תוכנה\\ISE5783_1997_1609\\unitTests\\geometries\" />\r\n      <recent name=\"C:\\Users\\user\\IdeaProjects\\ISE5783_1997_1609\\src\\geometries\" />\r\n      <recent name=\"C:\\Users\\user\\IdeaProjects\\ISE5783_1997_1609\\src\\PRIMITIVES\" />\r\n      <recent name=\"C:\\Users\\user\\IdeaProjects\\ISE5783_1997_1609\\src\" />\r\n    </key>\r\n    <key name=\"CreateTestDialog.Recents.Supers\">\r\n      <recent name=\"\" />\r\n    </key>\r\n    <key name=\"CreateTestDialog.RecentsKey\">\r\n      <recent name=\"primitives\" />\r\n      <recent name=\"geometries\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.ShadowTests\">\r\n    <configuration name=\"All in ISE5783_1997_1609 (1)\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"ISE5783_1997_1609\" />\r\n      <option name=\"PACKAGE_NAME\" value=\"\" />\r\n      <option name=\"TEST_OBJECT\" value=\"package\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"LightsTests\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"ISE5783_1997_1609\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"lighting.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"lighting\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"lighting.LightsTests\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"RenderTests\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"ISE5783_1997_1609\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"renderer.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"renderer\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"renderer.RenderTests\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"RenderTests.basicRenderXml\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"ISE5783_1997_1609\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"renderer.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"renderer\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"renderer.RenderTests\" />\r\n      <option name=\"METHOD_NAME\" value=\"basicRenderXml\" />\r\n      <option name=\"TEST_OBJECT\" value=\"method\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"ShadowTests\" type=\"JUnit\" factoryName=\"JUnit\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <module name=\"ISE5783_1997_1609\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"renderer.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"renderer\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"renderer.ShadowTests\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"JUnit.ShadowTests\" />\r\n        <item itemvalue=\"JUnit.All in ISE5783_1997_1609 (1)\" />\r\n        <item itemvalue=\"JUnit.LightsTests\" />\r\n        <item itemvalue=\"JUnit.RenderTests\" />\r\n        <item itemvalue=\"JUnit.RenderTests.basicRenderXml\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"0e31cecc-30d5-418a-833b-21c4a1f67da0\" name=\"Changes\" comment=\"calcColor function and Adding tests\" />\r\n      <created>1677598766226</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1677598766226</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"blabla\">\r\n      <created>1678627462310</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1678627462310</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"blabla\">\r\n      <created>1679387734086</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1679387734086</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"blabla\">\r\n      <created>1679387745339</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1679387745339</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"start stage 2 - unit testing\">\r\n      <created>1680020092948</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680020092948</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"start stage 2 - unit testing\">\r\n      <created>1680186208348</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1680186208348</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Merge remote-tracking branch 'origin/master'\">\r\n      <created>1681786863332</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681786863332</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"PR\">\r\n      <created>1681787280375</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681787280375</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"PR2\">\r\n      <created>1681787290751</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681787290751</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"stage 2 finish\">\r\n      <created>1681827735442</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681827735442</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"stage 2 finish\">\r\n      <created>1681833619198</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681833619198</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml\">\r\n      <created>1681833672849</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1681833672849</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml\">\r\n      <created>1682277463665</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682277463665</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"Merge remote-tracking branch 'origin/master'\">\r\n      <created>1682277779781</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682277779781</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"start of level 3 - intersection's\">\r\n      <created>1682321697738</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682321697738</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"level 3 A - intersection's - nadav\">\r\n      <created>1682675713626</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1682675713626</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"level 3 A - intersection's - nadav\">\r\n      <created>1683646545287</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1683646545287</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"Beginning of step 6 adding light sources and tests\">\r\n      <created>1684862383467</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1684862383467</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"start stage 7 and add shading\">\r\n      <created>1685461724863</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1685461724863</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"start stage 7\">\r\n      <created>1685461747535</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1685461747535</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"20\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"blabla\" />\r\n    <MESSAGE value=\"start stage 2 - unit testing\" />\r\n    <MESSAGE value=\"Adding tests to the geometric class and correcting get_normal  functions\" />\r\n    <MESSAGE value=\"PR\" />\r\n    <MESSAGE value=\"PR2\" />\r\n    <MESSAGE value=\"p2\" />\r\n    <MESSAGE value=\"stage 2 finishstage 2 finish\" />\r\n    <MESSAGE value=\"stage 2 finish\" />\r\n    <MESSAGE value=\"Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml\" />\r\n    <MESSAGE value=\"Merge remote-tracking branch 'origin/master'\" />\r\n    <MESSAGE value=\"start of level 3 - intersection's\" />\r\n    <MESSAGE value=\"level 3 A - intersection's - nadav\" />\r\n    <MESSAGE value=\"Beginning of step 6 adding light sources and tests\" />\r\n    <MESSAGE value=\"start stage 7 and add shading\" />\r\n    <MESSAGE value=\"start stage 7\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"start stage 7\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision bca0d9a0fee3132073dbfc95b5153a87d1589984)
++++ b/.idea/workspace.xml	(date 1685477515105)
+@@ -4,24 +4,18 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="start stage 7">
++    <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="end stage 7.1">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/base render test.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/color render test.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/lightSphereDirectional.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/lightSphereMultiple.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/lightSpherePoint.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/lightSphereSpot.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/lightSphereSpotSharp.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesDirectional.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesMultiple.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesPoint.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesSpot.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesSpotSharp.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/xml render test.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/images/yellow submarine.png" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/scene/Scene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/scene/Scene.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleInitial.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowSphereTriangleInitial.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleMove1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowSphereTriangleMove1.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleMove2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowSphereTriangleMove2.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleSpot1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowSphereTriangleSpot1.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleSpot2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowSphereTriangleSpot2.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/images/shadowTrianglesSphere.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowTrianglesSphere.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/geometries/Geometries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Geometries.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/geometries/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Triangle.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/lighting/PointLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/PointLight.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -105,7 +99,7 @@
+       <recent name="geometries" />
+     </key>
+   </component>
+-  <component name="RunManager" selected="JUnit.ShadowTests">
++  <component name="RunManager" selected="JUnit.All in ISE5783_1997_1609 (1)">
+     <configuration name="All in ISE5783_1997_1609 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+       <module name="ISE5783_1997_1609" />
+       <option name="PACKAGE_NAME" value="" />
+@@ -177,8 +171,8 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="JUnit.ShadowTests" />
+         <item itemvalue="JUnit.All in ISE5783_1997_1609 (1)" />
++        <item itemvalue="JUnit.ShadowTests" />
+         <item itemvalue="JUnit.LightsTests" />
+         <item itemvalue="JUnit.RenderTests" />
+         <item itemvalue="JUnit.RenderTests.basicRenderXml" />
+@@ -327,7 +321,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1685461747535</updated>
+     </task>
+-    <option name="localTasksCounter" value="20" />
++    <task id="LOCAL-00020" summary="end stage 7.1">
++      <created>1685466024115</created>
++      <option name="number" value="00020" />
++      <option name="presentableId" value="LOCAL-00020" />
++      <option name="project" value="LOCAL" />
++      <updated>1685466024115</updated>
++    </task>
++    <option name="localTasksCounter" value="21" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -357,6 +358,7 @@
+     <MESSAGE value="Beginning of step 6 adding light sources and tests" />
+     <MESSAGE value="start stage 7 and add shading" />
+     <MESSAGE value="start stage 7" />
+-    <option name="LAST_COMMIT_MESSAGE" value="start stage 7" />
++    <MESSAGE value="end stage 7.1" />
++    <option name="LAST_COMMIT_MESSAGE" value="end stage 7.1" />
+   </component>
+ </project>
+\ No newline at end of file
