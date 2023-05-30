@@ -18,4 +18,5 @@ public abstract class RadialGeometry extends Geometry{
 
         this.radius = radius;
     }
+
 }

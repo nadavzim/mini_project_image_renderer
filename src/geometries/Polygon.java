@@ -3,12 +3,11 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
-import static primitives.Util.checkSign;
 
 import java.util.List;
 import java.util.ArrayList;
 
-import static primitives.Util.isZero;
+import static primitives.Util.*;
 
 /** Polygon class represents two-dimensional polygon in 3D Cartesian coordinate
  * system
@@ -83,7 +82,7 @@ public class Polygon extends Geometry {
    @Override
    public Vector getNormal(Point point) { return plane.getNormal(); }
    @Override
-   public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+   public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
 
       int len = vertices.size();
       Point p0 = ray.getP0();
@@ -108,12 +107,14 @@ public class Polygon extends Geometry {
             return null;
       }
 
-      List<GeoPoint> geoPoints = plane.findGeoIntersectionsHelper(ray);
+      List<GeoPoint> geoPoints = plane.findGeoIntersectionsHelper(ray, maxDistance);
       List<GeoPoint> newGeoPoints = new ArrayList<>();
       if (geoPoints == null)
          return null;
       for (GeoPoint geo : geoPoints) {
-         newGeoPoints.add(new GeoPoint(this, geo.point));
+         if (alignZero(geo.point.distanceSquared(ray.getP0())-maxDistance*maxDistance) <= 0)
+            newGeoPoints.add(new GeoPoint(this, geo.point));
+
          }
       return newGeoPoints;
 

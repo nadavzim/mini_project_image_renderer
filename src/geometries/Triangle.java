@@ -14,6 +14,8 @@ import primitives.Vector;
 import primitives.Ray;
 import java.util.List;
 
+import static primitives.Util.alignZero;
+
 
 /**
  A class representing a triangle in a three-dimensional space.
@@ -50,8 +52,8 @@ public class Triangle extends Polygon {
      */
 
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        List<GeoPoint> result = plane.findGeoIntersectionsHelper(ray);
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        List<GeoPoint> result = plane.findGeoIntersectionsHelper(ray, maxDistance);
         if (result == null)
             return null;
 
@@ -76,7 +78,8 @@ public class Triangle extends Polygon {
 
         if ((s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0)) {
             Point point = result.get(0).point;
-            return List.of(new GeoPoint(this, point));
+            if (alignZero(point.distanceSquared(ray.getP0())-maxDistance*maxDistance) <= 0)
+                return List.of(new GeoPoint(this, point));
         }
         return null;
         }

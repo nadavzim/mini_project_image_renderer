@@ -32,18 +32,24 @@ public abstract class Intersectable {
                     '}';
         }
     }
-    /**
-     * Finds the intersection points between the Intersectable object and a given Ray.
-     *
-     * @param ray the Ray to test for intersection with the Intersectable object.
-     * @return a List of Point objects representing the intersection points, or an empty list if no intersections  found.
-     */
-    public List<GeoPoint> findGeoIntersections(Ray ray) {
-        return findGeoIntersectionsHelper(ray);
+
+//    public final List<GeoPoint> findGeoIntersections(Ray ray) {
+//        return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
+//    }
+    public final List<GeoPoint> findGeoIntersections(Ray ray) {
+        return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
+    }
+    protected abstract List<GeoPoint>
+    findGeoIntersectionsHelper(Ray ray, double maxDistance);
+
+
+
+    public List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        return findGeoIntersectionsHelper(ray, maxDistance);
     }
     public List<Point> findIntersections(Ray ray) {
         var geoList = findGeoIntersections(ray);
         return geoList == null ? null : geoList.stream().map(gp -> gp.point).toList();
     }
-    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+//    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
 }

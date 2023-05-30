@@ -13,6 +13,12 @@ import static primitives.Util.alignZero;
 
 
 public class RayTracerBasic extends RayTracerBase{
+
+    /**
+     * The delta for the shadow rays
+     */
+    private static final double DELTA = 0.1;
+
     /**
      * constructor
      * @param scene       the scene
@@ -30,7 +36,7 @@ public class RayTracerBasic extends RayTracerBase{
      */
     @Override
     public Color traceRay(Ray ray) {
-        List<GeoPoint> intersections = this.scene.geometries.findGeoIntersectionsHelper(ray);
+        List<GeoPoint> intersections = this.scene.geometries.findGeoIntersections(ray);
         if (intersections == null)
             return scene.background;
         else {
@@ -114,4 +120,9 @@ public class RayTracerBasic extends RayTracerBase{
         nl = Math.abs(nl);
         return material.getKd().scale(nl);
     }
+//    private boolean unshaded(GeoPoint gp, Vector l, Vector n, LightSource light){
+//
+//
+//    }
+
 }
