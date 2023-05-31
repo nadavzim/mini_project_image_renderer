@@ -5,30 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="start stage 7">
+      <change afterPath="$PROJECT_DIR$/unitTests/renderer/twentySevenGeometries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_2023_11_16_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_2023_11_16_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_31_2023_1_25_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_31_2023_1_25_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/base render test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/color render test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightSphereDirectional.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightSphereMultiple.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightSpherePoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightSphereSpot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightSphereSpotSharp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesDirectional.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesMultiple.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesPoint.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesSpot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesSpotSharp.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleInitial.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleMove1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleMove2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleSpot1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleSpot2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowTrianglesSphere.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/xml render test.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/yellow submarine.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Material.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Material.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Vector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/renderer/ReflectionRefractionTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/ReflectionRefractionTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +54,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2MNCgOBzZmSUKtzElTGolxr0R7P" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -107,6 +93,9 @@
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="lighting" />
+    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="primitives" />
       <recent name="geometries" />
@@ -121,16 +110,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="LightsTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FinalTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1997_1609" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lighting.*" />
+          <option name="PATTERN" value="renderer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="lighting" />
-      <option name="MAIN_CLASS_NAME" value="lighting.LightsTests" />
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.FinalTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -151,7 +140,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RenderTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ReflectionRefractionTests.pyramidTransparentSphere" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1997_1609" />
       <extension name="coverage">
         <pattern>
@@ -160,13 +149,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.RenderTests" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="renderer.ReflectionRefractionTests" />
+      <option name="METHOD_NAME" value="pyramidTransparentSphere" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShadowTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="above10Geometries" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1997_1609" />
       <extension name="coverage">
         <pattern>
@@ -175,7 +165,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.ShadowTests" />
+      <option name="MAIN_CLASS_NAME" value="renderer.above10Geometries" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -184,10 +174,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in ISE5783_1997_1609 (1)" />
+        <item itemvalue="JUnit.above10Geometries" />
+        <item itemvalue="JUnit.FinalTest" />
+        <item itemvalue="JUnit.ReflectionRefractionTests.pyramidTransparentSphere" />
         <item itemvalue="JUnit.ReflectionRefractionTests" />
-        <item itemvalue="JUnit.ShadowTests" />
-        <item itemvalue="JUnit.LightsTests" />
-        <item itemvalue="JUnit.RenderTests" />
       </list>
     </recent_temporary>
   </component>
@@ -364,5 +354,10 @@
     <MESSAGE value="start stage 7 and add shading" />
     <MESSAGE value="start stage 7" />
     <option name="LAST_COMMIT_MESSAGE" value="start stage 7" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ISE5783_1997_1609$LightsTests_trianglesSpotSharp.ic" NAME="LightsTests.trianglesSpotSharp Coverage Results" MODIFIED="1685475253107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>lighting.*</FILTER>
+    </SUITE>
   </component>
 </project>

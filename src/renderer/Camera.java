@@ -7,7 +7,7 @@ import primitives.Vector;
 
 import java.util.MissingResourceException;
 
-import static primitives.Util.isZero;
+import static primitives.Util.*;
 
 public class Camera {
     // the camera's location
@@ -183,12 +183,12 @@ public class Camera {
     }
 
     /**
-     * construct a ray from the camera throu a specific pixel in the View Plane
+     * construct a ray from the camera through a specific pixel in the View Plane
      * and get the color of the pixel
      * @param nX how many pixels are in the X dim
      * @param nY how many pixels are in the Y dim
-     * @param j the pixel to go throu X dim
-     * @param i the pixel to go throu Y dim
+     * @param j the pixel to go through X dim
+     * @param i the pixel to go through Y dim
      * @return the color of the pixel
      */
     private Color castRay(int nX, int nY, int j, int i) {
@@ -226,4 +226,77 @@ public class Camera {
         this.imageWriter.writeToImage();
     }
 
+    public Camera moveCamera(Vector vector) {
+        p0 = p0.add(vector);
+        return this;
+    }
+
+    /**
+     * spin the camera 'angle' degrees clockwise around the To vector
+     * @param angle the angle we want to spin the camera
+     * @return this instance of camera
+     */
+    public Camera spin(double angle) {
+        double angleRad = Math.toRadians(angle);
+        double cos0 = Math.cos(angleRad);
+        double sin0 = Math.sin(angleRad);
+        if (isZero(cos0)) {
+            vUp = vRight.scale(getSign(angle));
+        } else if (isZero(sin0)) {
+            vUp = vUp.scale(cos0);
+        }
+        else {//rotate around the To vector using Rodrigues' rotation formula
+            vUp = vUp.scale(cos0)
+                    .add(vTo.crossProduct(vUp).scale(sin0));
+        }
+        vRight = vTo.crossProduct(vUp).normalize();
+        return this;
+    }
+    public static int getSign(double number) {
+        return number < 0 ? -1 : 1;
+    }
+
+    /**
+     * spin the camera 'angle' degrees clockwise around the Up vector
+     * @param angle  the angle we want to spin the camera
+     * @return this instance of camera
+     */
+    public Camera spinRightLeft(double angle) {
+        double angleRad = Math.toRadians(angle);
+        double cos0 = Math.cos(angleRad);
+        double sin0 = Math.sin(angleRad);
+        if (isZero(cos0)) {
+            vTo = vRight.scale(getSign(angle));
+        } else if (isZero(sin0)) {
+            vTo = vTo.scale(cos0);
+        }
+        else {//rotate around the To vector using Rodrigues' rotation formula
+            vTo = vTo.scale(cos0)
+                    .add(vUp.crossProduct(vTo).scale(Math.sin(angle)));
+        }
+        vRight = vTo.crossProduct(vUp).normalize();
+        return this;
+    }
+
+    /**
+     * spin the camera 'angle' degrees clockwise around the Right vector
+     * @param angle the angle we want to spin the camera
+     * @return this instance of camera
+     */
+    public Camera spinUpDown(double angle) {
+        double angleRad = Math.toRadians(angle);
+        double cos0 = Math.cos(angleRad);
+        double sin0 = Math.sin(angleRad);
+        if (isZero(cos0)) {
+            vTo = vUp.scale(getSign(angle));
+        } else if (isZero(sin0)) {
+            vTo = vUp.scale(cos0);
+        }
+        else {//rotate around the To vector using Rodrigues' rotation formula
+            vTo = vTo.scale(cos0)
+                    .add(vRight.crossProduct(vTo).scale(sin0));
+        }
+        vUp = vTo.crossProduct(vRight).scale(-1).normalize();
+        return this;
+    }
 }
