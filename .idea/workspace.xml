@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="start stage 7">
-      <change afterPath="$PROJECT_DIR$/unitTests/renderer/twentySevenGeometries.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_2023_11_16_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_30_2023_11_16_PM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_31_2023_1_25_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_31_2023_1_25_AM__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitives/Vector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Vector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/renderer/ReflectionRefractionTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/ReflectionRefractionTests.java" afterDir="false" />
-    </list>
+    <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="end of stage 7.2 - adding Reflection's with bonus of move+rotate Camera func and 27 shapes photo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -101,7 +92,7 @@
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in ISE5783_1997_1609 (1)">
+  <component name="RunManager" selected="JUnit.twentySevenGeometries">
     <configuration name="All in ISE5783_1997_1609 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1997_1609" />
       <option name="PACKAGE_NAME" value="" />
@@ -120,21 +111,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
       <option name="MAIN_CLASS_NAME" value="renderer.FinalTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ReflectionRefractionTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ISE5783_1997_1609" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="renderer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.ReflectionRefractionTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -171,13 +147,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="twentySevenGeometries" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ISE5783_1997_1609" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="renderer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="renderer" />
+      <option name="MAIN_CLASS_NAME" value="renderer.twentySevenGeometries" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.twentySevenGeometries" />
         <item itemvalue="JUnit.All in ISE5783_1997_1609 (1)" />
         <item itemvalue="JUnit.above10Geometries" />
         <item itemvalue="JUnit.FinalTest" />
         <item itemvalue="JUnit.ReflectionRefractionTests.pyramidTransparentSphere" />
-        <item itemvalue="JUnit.ReflectionRefractionTests" />
       </list>
     </recent_temporary>
   </component>
@@ -323,7 +314,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685461747535</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="end of stage 7.2 - adding Reflection's with bonus of move+rotate Camera func and 27 shapes photo">
+      <created>1685546023045</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1685546023045</updated>
+    </task>
+    <task id="LOCAL-00021" summary="end of stage 7.2 - adding Reflection's with bonus of move+rotate Camera func and 27 shapes photo">
+      <created>1685546305154</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1685546305154</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -353,7 +358,8 @@
     <MESSAGE value="Beginning of step 6 adding light sources and tests" />
     <MESSAGE value="start stage 7 and add shading" />
     <MESSAGE value="start stage 7" />
-    <option name="LAST_COMMIT_MESSAGE" value="start stage 7" />
+    <MESSAGE value="end of stage 7.2 - adding Reflection's with bonus of move+rotate Camera func and 27 shapes photo" />
+    <option name="LAST_COMMIT_MESSAGE" value="end of stage 7.2 - adding Reflection's with bonus of move+rotate Camera func and 27 shapes photo" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ISE5783_1997_1609$LightsTests_trianglesSpotSharp.ic" NAME="LightsTests.trianglesSpotSharp Coverage Results" MODIFIED="1685475253107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
