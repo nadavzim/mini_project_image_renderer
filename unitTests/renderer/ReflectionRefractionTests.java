@@ -5,6 +5,8 @@ package renderer;
 
 import static java.awt.Color.*;
 
+import geometries.Plane;
+import geometries.Polygon;
 import org.junit.jupiter.api.Test;
 
 import geometries.Sphere;
@@ -12,7 +14,6 @@ import geometries.Triangle;
 import lighting.AmbientLight;
 import lighting.SpotLight;
 import primitives.*;
-import renderer.*;
 import scene.Scene;
 
 /** Tests for reflection and transparency functionality, test for partial
@@ -22,7 +23,7 @@ import scene.Scene;
 public class ReflectionRefractionTests {
    private Scene scene = new Scene.SceneBuilder("Test scene").build();
 
-   /** Produce a picture of a sphere lighted by a spot light */
+   /** Produce a picture of a sphere lighted by a spotlight */
    @Test
    public void twoSpheres() {
       Camera camera = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //

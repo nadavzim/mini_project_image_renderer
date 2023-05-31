@@ -124,4 +124,7 @@ public class Point {
     public double getZ() {
         return xyz.d3;
     }
+//    public Double3 get_xyz() {
+//        return xyz;
+//    }
 }
