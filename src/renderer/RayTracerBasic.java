@@ -5,7 +5,7 @@ import primitives.*;
 import scene.Scene;
 
 import java.util.LinkedList;
-import java.util.List;
+import java.util.List;  
 
 import geometries.Intersectable.GeoPoint;
 
@@ -384,7 +384,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @param rays the given list of rays to trace
      * @return The average color of the rays
      */
-    public Color calcAverageColor(LinkedList<Ray> rays) {
+    public Color calcAverageColor(List<Ray> rays) {
         Color totalColor = Color.BLACK;
         for (Ray ray : rays) {
             totalColor = totalColor.add(traceRay(ray));

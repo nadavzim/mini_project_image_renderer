@@ -5,7 +5,9 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.MissingResourceException;
 
 import static primitives.Util.*;
@@ -28,8 +30,13 @@ public class Camera {
     private ImageWriter imageWriter;
     private RayTracerBase rayTracer;
 
+    private int numberOfRaysInPixel = 0;
 
-    private int amountOfSampledRays = 0;
+
+    public void setNumberOfRaysInPixel(int numberOfRaysInPixel) {
+        this.numberOfRaysInPixel = numberOfRaysInPixel;
+    }
+
 
     //------------------getters------------------//
     public Point getP0() {
@@ -59,8 +66,10 @@ public class Camera {
     public double getDistance() {
         return distance;
     }
-    public int getAmountOfSampledRays() {
-        return amountOfSampledRays;
+
+
+    public int numberOfRaysInPixel() {
+        return numberOfRaysInPixel;
     }
     //------------------end of getters------------------//
 
@@ -178,7 +187,7 @@ public class Camera {
 
             for (int row = 0; row < nY; row++) {
                 for (int col = 0; col < nX; col++) {
-                    LinkedList<Ray> rays = constructSampledRays(nX, nY, row, col);
+                    List<Ray> rays = constructRaysThroughPixel(nX, nY, row, col);
                     imageWriter.writePixel(row, col, rayTracer.calcAverageColor(rays));
 
 //                    Color color = castRay(nX, nY, row, col);
@@ -310,71 +319,34 @@ public class Camera {
         return this;
     }
 
-    public Camera setAmountOfSampledRays(int amountOfSampledRays) {
-        this.amountOfSampledRays = amountOfSampledRays;
-        return this;
-    }
 
-    /**
-     * Finds the middle of the pixle
-     *
-     * @param nX
-     * @param nY
-     * @param j
-     * @param i
-     * @return
-     */
-    private Point findCenterOfPixel(int nX, int nY, int j, int i) {
-        // Image center:
-        Point pCenter = this.p0.add(vTo.scale(this.distance));
+    public List<Ray> constructRaysThroughPixel(int nX, int nY, int j, int i) {
 
-        // Ratio:
-        double Ry = this.height / nY;
-        double Rx = this.width / nX;
+        // the returned list of rays
+        List<Ray> rays = new ArrayList<>();
 
-        if (nX % 2 == 0 || nY % 2 == 0) { // In case the number of columns or rows is even, it moves the Pceneter to the
-            // (0,0) pixel
-            pCenter = new Point(pCenter.getX() - Rx / 2, pCenter.getY() - Ry / 2, pCenter.getZ());
+        // add the center ray to the list
+        Ray centerRay = constructRay(nX, nY, j, i);
+        rays.add(centerRay);
+
+        // calculate the actual size of a pixel
+        // pixel height is the division of the view plane height in the number of rows of pixels
+        double pixelHeight = alignZero(height / nY);   //  Ry = h/Ny
+        // pixel width is the division of the view plane width in the number of columns of pixels
+        double pixelWidth = alignZero(width / nX);   //  Rx = w/Nx
+
+        if (numberOfRaysInPixel != 1) {
+            rays.addAll(centerRay.randomRaysInGrid(
+                    vUp,
+                    vRight,
+                    numberOfRaysInPixel,
+                    distance,
+                    pixelWidth,
+                    pixelHeight)
+            );
         }
-        // Pixel[i,j] center
-        double yi = alignZero(-(i - (nY - 1) / 2) * Ry);
-        double xj = alignZero((j - (nX - 1) / 2) * Rx);
-        Point pIJ = pCenter;
-        // To avoid a zero vector exception
-        if (xj != 0)
-            pIJ = pIJ.add(vRight.scale(xj));
-        if (yi != 0)
-            pIJ = pIJ.add(vUp.scale(yi));
-        return pIJ;
+
+        return rays;
     }
 
-    /**
-     * Calculates the super sampled rays in a pixel
-     *
-     * @param nX how many pixels are in the X dim
-     * @param nY how many pixels are in the Y dim
-     * @param j the pixel to go through X dim
-     * @param i the pixel to go through Y dim
-     * @return Linked List of the sampled rays, the basic ray included
-     */
-    public LinkedList<Ray> constructSampledRays(int nX, int nY, int j, int i) {
-        LinkedList<Ray> result = new LinkedList<Ray>();
-        Point pCenter = findCenterOfPixel(nX, nY, j, i);
-        double Ry = this.height / nY;
-        double Rx = this.width / nX;
-        double randX;
-        double randY;
-        Point sPoint;
-        Ray sRay;
-        result.add(new Ray(p0, pCenter.subtract(this.p0))); //adding the basic ray
-        // The loop finds random rays at the needed amount in the margins of the pixel
-        for (int k = 0; k < amountOfSampledRays; k++) {
-            randX = random(-Rx / 2, Rx / 2); // Random x value of the new point on the view plane
-            randY = random(-Ry / 2, Ry / 2); // Random y value of the new point on the view plane
-            sPoint = new Point(pCenter.getX() + randX, pCenter.getY() + randY, pCenter.getZ()); // Creates the new sampled point
-            sRay = new Ray(this.p0, sPoint.subtract(this.p0)); // Creates the sampled ray
-            result.add(sRay); // Add the ray to the list of sampled rays
-        }
-        return result;
-    }
 }

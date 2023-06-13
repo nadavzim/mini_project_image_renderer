@@ -52,7 +52,8 @@ public class BoxTest {
 
         Camera camera3;
         camera3 = new Camera(new Point(0, 500, 950), new Vector(0, -0.432, -0.901), new Vector(0, 0.901, -0.432)) //
-                .setVPSize(150, 150).setVPDistance(1000).setAmountOfSampledRays(89);
+                .setVPSize(150, 150).setVPDistance(1000);
+        camera3.setNumberOfRaysInPixel(89);
         camera3.moveCamera(new Vector(450, 0, 0)). spinRightLeft(0.4);
 
         ImageWriter imageWriter1 = new ImageWriter("Box test aa89", 400, 400);
