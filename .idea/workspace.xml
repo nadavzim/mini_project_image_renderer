@@ -4,51 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="end of stage 7.2 - adding Reflection's with bonus of move+rotate Camera func and 27 shapes photo">
-      <change afterPath="$PROJECT_DIR$/src/geometries/Box.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/renderer/AntiAliasingTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/unitTests/renderer/BoxTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2023_7_03_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_31_2023_1_25_AM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_31_2023_1_25_AM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="end stage 7.2 without bonus">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_2023_6_39_PM_[Changes]/ball's picture move right 450 and spin left 0.4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_2023_6_39_PM_[Changes]/balls picture move right 450, towards 20,down 30 and spin left 0.35 and down 1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_2023_6_39_PM_[Changes]/balls picture no moves.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_2023_6_39_PM_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_2023_6_39_PM_[Changes]1/ball's picture move right 450 and spin left 0.4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_2023_6_39_PM_[Changes]1/balls picture move right 450, towards 20,down 30 and spin left 0.35 and down 1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_2023_6_39_PM_[Changes]1/balls picture no moves.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_2023_6_39_PM_[Changes]1/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_2023_6_39_PM__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_12_2023_6_39_PM__Changes_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/WithoutSoftShadow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/antiAliasing+spot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/softShadow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/unitTests/renderer/SoftShadow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_24_2023_7_03_PM_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/ball's picture move right 450 and spin left 0.4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/Box test aa89.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/Box test aa89.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/aantiAliasing+spot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/images/balls picture move right 450 and spin left 0.4.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/balls picture move right 450 and spin left 0.4.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/images/balls picture move right 450, towards 20,down 30 and spin left 0.35 and down 1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/balls picture move right 450, towards 20,down 30 and spin left 0.35 and down 1.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/images/balls picture no moves.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/balls picture no moves.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/base render test.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/base render test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/color render test.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/color render test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightSphereDirectional.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightSphereDirectional.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightSphereMultiple.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightSphereMultiple.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightSpherePoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightSpherePoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightSphereSpot.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightSphereSpot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightSphereSpotSharp.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightSphereSpotSharp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesDirectional.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightTrianglesDirectional.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesMultiple.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightTrianglesMultiple.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesPoint.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightTrianglesPoint.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesSpot.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightTrianglesSpot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/lightTrianglesSpotSharp.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/lightTrianglesSpotSharp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/reflectionTwoSpheresMirrored.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/reflectionTwoSpheresMirrored.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/refractionShadow.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/refractionShadow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/refractionTwoSpheres.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/refractionTwoSpheres.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleInitial.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowSphereTriangleInitial.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleMove1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowSphereTriangleMove1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleMove2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowSphereTriangleMove2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleSpot1.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowSphereTriangleSpot1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowSphereTriangleSpot2.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowSphereTriangleSpot2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/shadowTrianglesSphere.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/shadowTrianglesSphere.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/xml render test.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/xml render test.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/DirectionalLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lighting/LightSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/LightSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lighting/PointLight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/lighting/PointLight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Double3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Double3.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/RayTracerBasic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/renderer/twentySevenGeometries.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/twentySevenGeometries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/renderer/AntiAliasingTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/AntiAliasingTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/renderer/ReflectionRefractionTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CompilerWorkspaceConfiguration">
-    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -104,10 +93,10 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -125,7 +114,6 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="renderer" />
       <recent name="lighting" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
@@ -133,8 +121,8 @@
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.AntiAliasingTests.test">
-    <configuration name="All in ISE5783_1997_1609" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.All in ISE5783_1997_1609 (1)">
+    <configuration name="All in ISE5783_1997_1609 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1997_1609" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
@@ -173,7 +161,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BoxTest.basicBoxTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SoftShadow" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1997_1609" />
       <extension name="coverage">
         <pattern>
@@ -182,14 +170,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.BoxTest" />
-      <option name="METHOD_NAME" value="basicBoxTest" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="renderer.SoftShadow" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="twentySevenGeometries.sphereSpot" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SoftShadow.soft" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1997_1609" />
       <extension name="coverage">
         <pattern>
@@ -198,8 +185,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="renderer" />
-      <option name="MAIN_CLASS_NAME" value="renderer.twentySevenGeometries" />
-      <option name="METHOD_NAME" value="sphereSpot" />
+      <option name="MAIN_CLASS_NAME" value="renderer.SoftShadow" />
+      <option name="METHOD_NAME" value="soft" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -207,11 +194,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AntiAliasingTests.test" />
-        <item itemvalue="JUnit.All in ISE5783_1997_1609" />
+        <item itemvalue="JUnit.All in ISE5783_1997_1609 (1)" />
         <item itemvalue="JUnit.AntiAliasingTests" />
-        <item itemvalue="JUnit.twentySevenGeometries.sphereSpot" />
-        <item itemvalue="JUnit.BoxTest.basicBoxTest" />
+        <item itemvalue="JUnit.SoftShadow" />
+        <item itemvalue="JUnit.AntiAliasingTests.test" />
+        <item itemvalue="JUnit.SoftShadow.soft" />
       </list>
     </recent_temporary>
   </component>
@@ -371,14 +358,7 @@
       <option name="project" value="LOCAL" />
       <updated>1685546305154</updated>
     </task>
-    <task id="LOCAL-00022" summary="end of stage 7.2 - adding Reflection's with bonus of move+rotate Camera func and 27 shapes photo">
-      <created>1685546708186</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1685546708186</updated>
-    </task>
-    <option name="localTasksCounter" value="23" />
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -410,27 +390,6 @@
     <MESSAGE value="start stage 7" />
     <MESSAGE value="end of stage 7.2 - adding Reflection's with bonus of move+rotate Camera func and 27 shapes photo" />
     <option name="LAST_COMMIT_MESSAGE" value="end of stage 7.2 - adding Reflection's with bonus of move+rotate Camera func and 27 shapes photo" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/unitTests/renderer/BoxTest.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/unitTests/renderer/AntiAliasingTests.java</url>
-          <line>53</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/unitTests/renderer/AntiAliasingTests.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ISE5783_1997_1609$LightsTests_trianglesSpotSharp.ic" NAME="LightsTests.trianglesSpotSharp Coverage Results" MODIFIED="1685475253107" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

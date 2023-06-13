@@ -3,16 +3,10 @@ package renderer;
 
 import geometries.*;
 import org.junit.jupiter.api.Test;
-
 import lighting.*;
-import primitives.Color;
-import primitives.Material;
-import primitives.Point;
-import primitives.Vector;
 import scene.Scene;
-
+import primitives.*;
 import static java.awt.Color.*;
-
 
 /**
  * @author nadav, bed-room Test for Anti-aliasing improvment
@@ -107,7 +101,7 @@ public class AntiAliasingTests {
         }
 
 
-        ImageWriter imageWriter = new ImageWriter("aantiAliasing+spot", 1000, 1000);
+        ImageWriter imageWriter = new ImageWriter("antiAliasing+spot", 1000, 1000);
                 camera.setImageWriter(imageWriter)//.moveCamera(new Vector(-140, 80, 35)) //
                 .setImageWriter(imageWriter) //
                 .setRayTracer(new RayTracerBasic(scene));//turnAllBoxesOn())

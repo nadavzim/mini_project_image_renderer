@@ -3,6 +3,7 @@ package lighting;
 import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
+import java.util.List;
 
 public class DirectionalLight extends Light implements LightSource{
 
@@ -14,6 +15,9 @@ public class DirectionalLight extends Light implements LightSource{
     public DirectionalLight(Color intensity, Vector direction) {
         super(intensity);
         this.direction = direction;
+    }
+    public List<Vector> getListL(Point p){
+        return List.of(getL(p));
     }
 
     /**
