@@ -1,4 +1,3 @@
-
 package primitives;
 
 import java.util.Objects;
@@ -105,14 +104,15 @@ public class Point {
     }
 
     /**
-
-     Computes a new Vector object as the difference between this Point object and another Point object.
-     @param secondPoint the Point object to subtract from this Point object
-     @return a new Vector object representing the difference between this Point object and the other Point object
+     * Computes a new Vector object as the difference between this Point object and another Point object.
+     *
+     * @param secondPoint the Point object to subtract from this Point object
+     * @return a new Vector object representing the difference between this Point object and the other Point object
      */
     public Vector subtract(Point secondPoint) {
         return new Vector(xyz.subtract(secondPoint.xyz));
     }
+
     public double getX() {
         return xyz.d1;
     }

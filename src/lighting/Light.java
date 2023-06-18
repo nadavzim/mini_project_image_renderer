@@ -7,7 +7,7 @@ public abstract class Light {
     /**
      * The color of the light.
      */
-    private Color intensity;
+    private final Color intensity;
 
 
     /**

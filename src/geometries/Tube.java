@@ -14,14 +14,14 @@ import static primitives.Util.isZero;
  * This class represents a tube shape in 3D space, which is defined by its radius and axis Ray.
  * It extends RadialGeometry class and adds an axis Ray field.
  */
-public class Tube extends RadialGeometry{
+public class Tube extends RadialGeometry {
     Ray axisRay;
 
     /**
      * Constructs a new Tube object with a given radius and axis Ray.
      *
-     * @param radius   The radius of the tube.
-     * @param axisRay  The axis Ray of the tube.
+     * @param radius  The radius of the tube.
+     * @param axisRay The axis Ray of the tube.
      */
     public Tube(Ray axisRay, double radius) {
         super(radius);
@@ -50,21 +50,19 @@ public class Tube extends RadialGeometry{
         // t = v * (p - p0)
         // o = p0 + t * v
 
-        Vector v= axisRay.getDir();
-        Point p0 =axisRay.getP0();
+        Vector v = axisRay.getDir();
+        Point p0 = axisRay.getP0();
 
         Vector vec = point.subtract(p0);
         double t = v.dotProduct(vec);
         //t = alignZero(t);
 
         //if t=0, then t*v is the zero vector and o=p0.
-        Point o=p0;
+        Point o = p0;
 
-        if(!isZero(t))
-        {
+        if (!isZero(t)) {
             o = p0.add(v.scale(t));
-        }
-        else
+        } else
             return vec.normalize();
         if (point.equals(o))
             throw new IllegalArgumentException("point cannot be on the tube axis");
@@ -73,7 +71,7 @@ public class Tube extends RadialGeometry{
     }
 
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance, boolean bb) {
         Vector dir = ray.getDir();
         Vector v = axisRay.getDir();
         double dirV = dir.dotProduct(v);
@@ -120,16 +118,15 @@ public class Tube extends RadialGeometry{
             _points.add(new GeoPoint(this, ray.getPoint(t1)));
             _points.add(new GeoPoint(this, ray.getPoint(t2)));
             return _points;
-        }
-        else if (t1 > 0 && alignZero(t1 - maxDistance) <= 0) {
+        } else if (t1 > 0 && alignZero(t1 - maxDistance) <= 0) {
             List<GeoPoint> _points = new ArrayList<>(1);
             _points.add(new GeoPoint(this, ray.getPoint(t1)));
-            return  _points;
-        }
-        else if (t2 > 0 && alignZero(t2 - maxDistance) <= 0) {
+            return _points;
+        } else if (t2 > 0 && alignZero(t2 - maxDistance) <= 0) {
             List<GeoPoint> _points = new ArrayList<>(1);
             _points.add(new GeoPoint(this, ray.getPoint(t2)));
             return _points;
         }
         return null;
-    }}
+    }
+}

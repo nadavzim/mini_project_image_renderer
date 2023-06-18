@@ -19,8 +19,8 @@ public class twentySevenGeometries {
 
     @Test
     // A test for the scene of the spheres.
-    public void sphereSpot() {
-        int resolution = 500, smaplePerPixel = 33;
+    public void balls() {
+        int resolution = 1000, smaplePerPixel = 3;
         Point center = new Point(-60,0,0);
         for(int i=0;i<5;i++){
             for(int j=0;j<5;j++){
@@ -49,6 +49,9 @@ public class twentySevenGeometries {
         Camera camera1, camera2, camera3;
         camera1 = camera2 = camera3 = new Camera(new Point(0, 500, 950), new Vector(0, -0.432, -0.901), new Vector(0, 0.901, -0.432)) //
                 .setVPSize(150, 150).setVPDistance(1000);
+
+
+        scene1.geometries.BuildBvhTree();
 
         camera1.setNumberOfRaysInPixel(smaplePerPixel);
         ImageWriter imageWriter1 = new ImageWriter("aa balls picture no moves", resolution, resolution);

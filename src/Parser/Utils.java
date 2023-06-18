@@ -1,9 +1,11 @@
 package Parser;
 
-import java.util.Map;
+import geometries.Sphere;
+import geometries.Triangle;
+import primitives.Color;
+import primitives.Point;
 
-import geometries.*;
-import primitives.*;
+import java.util.Map;
 
 public class Utils {
     /**
@@ -26,6 +28,7 @@ public class Utils {
         double[] numbers = mapStringToDouble(string.split(" "));
         return new Point(numbers[0], numbers[1], numbers[2]);
     }
+
     /**
      * @param string string of doubles
      * @return color
@@ -34,6 +37,7 @@ public class Utils {
         double[] numbers = mapStringToDouble(string.split(" "));
         return new Color(numbers[0], numbers[1], numbers[2]);
     }
+
     /**
      * @param sphereString of doubles
      * @return sphere
@@ -44,8 +48,9 @@ public class Utils {
         Double radius = Double.parseDouble(sphereString.get("radius"));
         return new Sphere(center, radius);
     }
+
     /**
-     * @param  triangleString of doubles
+     * @param triangleString of doubles
      * @return triangle
      */
     public static Triangle makeTriangle(Map<String, String> triangleString) {

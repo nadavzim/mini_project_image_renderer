@@ -1,4 +1,5 @@
 package geometries;
+
 import primitives.Color;
 import primitives.Material;
 import primitives.Point;
@@ -7,7 +8,7 @@ import primitives.Vector;
 /**
  * The Geometry interface represents a geometric object in three-dimensional space.
  */
-public abstract class Geometry extends Intersectable {
+public abstract class Geometry extends Container {
     protected Color emission = Color.BLACK;
     private Material material = new Material();
 
@@ -17,25 +18,28 @@ public abstract class Geometry extends Intersectable {
      * @param point the point on the geometry object
      * @return the normal vector to the geometry object at the given point
      */
-    public abstract Vector  getNormal(Point point);
+    public abstract Vector getNormal(Point point);
 
     /**
-     Retrieves the emission color of the object.
-     @return The Color representing the emission color of the object.
+     * Retrieves the emission color of the object.
+     *
+     * @return The Color representing the emission color of the object.
      */
     public Color getEmission() {
         return emission;
     }
 
     /**
-     Sets the emission color of the object.
-     @param emission The Color representing the new emission color of the object.
-     @return The updated Geometry object with the new emission color.
+     * Sets the emission color of the object.
+     *
+     * @param emission The Color representing the new emission color of the object.
+     * @return The updated Geometry object with the new emission color.
      */
     public Geometry setEmission(Color emission) {
         this.emission = emission;
         return this;
     }
+
     /**
      * Returns the material of the geometry object.
      *
@@ -44,6 +48,7 @@ public abstract class Geometry extends Intersectable {
     public Material getMaterial() {
         return material;
     }
+
     /**
      * Sets the material of the geometry object.
      *

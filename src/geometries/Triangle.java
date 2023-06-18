@@ -9,16 +9,18 @@
 //}
 
 package geometries;
+
 import primitives.Point;
-import primitives.Vector;
 import primitives.Ray;
+import primitives.Vector;
+
 import java.util.List;
 
 import static primitives.Util.alignZero;
 
 
 /**
- A class representing a triangle in a three-dimensional space.
+ * A class representing a triangle in a three-dimensional space.
  */
 public class Triangle extends Polygon {
     /**
@@ -51,7 +53,7 @@ public class Triangle extends Polygon {
      * @return a List of Point objects representing the intersection points, or an empty list if no intersections  found.
      */
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance, boolean bb) {
         // Gets all intersections with the plane
         var result = plane.findGeoIntersections(ray, maxDistance);
 
@@ -79,8 +81,8 @@ public class Triangle extends Polygon {
         // if all the points have the same sign(+/-),
         // all the points are inside the triangle
         if (a < 0 && b < 0 && c < 0 || a > 0 && b > 0 && c > 0)
-            return List.of(new GeoPoint(this,result.get(0).point));
+            return List.of(new GeoPoint(this, result.get(0).point));
 
         return null;
     }
-    }
+}

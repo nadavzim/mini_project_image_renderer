@@ -1,9 +1,9 @@
 package scene;
 
+import geometries.Geometries;
 import geometries.Sphere;
 import geometries.Triangle;
 import lighting.AmbientLight;
-import geometries.Geometries;
 import lighting.LightSource;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -34,10 +34,10 @@ public class Scene {
     public AmbientLight ambientLight;
     public Geometries geometries;
     List<LightSource> lights = new ArrayList<>();
+    private boolean bb = false; // bounding box
 
 
     /**
-     *
      * @param builder The builder object.
      */
     public Scene(SceneBuilder builder) {
@@ -49,7 +49,19 @@ public class Scene {
 
     }
 
+    /**
+     * setter for bounding box flag
+     *
+     * @return this instance
+     */
+    public Scene setbb() {
+        this.bb = false;
+        return this;
+    }
 
+    public boolean isBb() {
+        return bb;
+    }
 
     /**
      * Getter for the name of the scene.
@@ -78,6 +90,10 @@ public class Scene {
         return this.ambientLight;
     }
 
+    public void setAmbientLight(AmbientLight ambientLight) {
+        this.ambientLight = ambientLight;
+    }
+
     /**
      * Getter for the geometries structures in the scene.
      *
@@ -96,17 +112,12 @@ public class Scene {
         return this.lights;
     }
 
-    public void setAmbientLight(AmbientLight ambientLight) {
-        this.ambientLight = ambientLight;
-    }
-
-
     /**
      * inner class SceneBuilder builds Scene object using builder pattern
      */
     public static class SceneBuilder {
 
-        public  String name;
+        public String name;
         public Color background = Color.BLACK;
         public AmbientLight ambientLight = AmbientLight.NONE;
         public Geometries geometries = new Geometries();
@@ -177,7 +188,7 @@ public class Scene {
          * @param file The xml file.
          * @return The SceneBuilder object.
          */
-        public SceneBuilder XmlScene (File file){
+        public SceneBuilder XmlScene(File file) {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder;
             Document doc = null;

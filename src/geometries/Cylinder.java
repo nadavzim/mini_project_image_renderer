@@ -3,13 +3,14 @@ package geometries;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
+
 import static primitives.Util.isZero;
 
 /**
  * This class represents a cylinder shape in 3D space, which is defined by its base axis tube and height.
  * It extends Tube class and adds a height field.
  */
-public class Cylinder extends Tube{
+public class Cylinder extends Tube {
     double height;
 
     /**
@@ -21,9 +22,9 @@ public class Cylinder extends Tube{
      */
     public Cylinder(Ray axisRay, double radius, double height) {
         super(axisRay, radius);
-        if(radius<=0)
+        if (radius <= 0)
             throw new IllegalArgumentException("The radius low then zero!");
-        if(height<=0)
+        if (height <= 0)
             throw new IllegalArgumentException("The height low equal to zero!");
         this.height = height;
     }
@@ -50,41 +51,43 @@ public class Cylinder extends Tube{
         // t = v * (point - p0)
         // o = p0 + t * v
 
-        Vector v= axisRay.getDir();
-        Point p0 =axisRay.getP0();
+        Vector v = axisRay.getDir();
+        Point p0 = axisRay.getP0();
 
         //if p=p0, then (p-p0) is zero vector
         //returns the vector of the base as a normal
-        if(point.equals(p0)){
+        if (point.equals(p0)) {
             return v.scale(-1);
         }
 
-        double t= v.dotProduct(point.subtract(p0));
+        double t = v.dotProduct(point.subtract(p0));
         //check if the point on the bottom
-        if(isZero(t)){
+        if (isZero(t)) {
             return v.scale(-1);
         }
         //check if the point on the top
-        if(isZero(t-height)){
+        if (isZero(t - height)) {
             return v;
         }
 
-        Point o=p0.add(v.scale(t));
+        Point o = p0.add(v.scale(t));
         return point.subtract(o).normalize();
     }
+
     @Override
     public String toString() {
         return "Cylinder{" +
-                super.toString()+
+                super.toString() +
                 "height=" + height +
                 '}';
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (/*o == null ||*/ !(o instanceof Cylinder cylinder)) return false;
         if (!super.equals(o)) return false;
 
-        return this.height==cylinder.height;
+        return this.height == cylinder.height;
     }
 }

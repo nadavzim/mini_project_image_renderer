@@ -22,21 +22,34 @@ public class Material {
     }
 
     /**
+     * Setter for the Ks field.
+     *
+     * @param Ks specular reflectivity
+     * @return The material itself.
+     */
+    public Material setKs(double Ks) {
+        this.Ks = new Double3(Ks);
+        return this;
+    }
+
+    /**
+     * Setter for the Ks field.
+     *
+     * @param Ks specular reflectivity
+     * @return The material itself.
+     */
+    public Material setKs(Double3 Ks) {
+        this.Ks = Ks;
+        return this;
+    }
+
+    /**
      * Getter for Kd field.
      *
      * @return The value of diffuse reflectivity.
      */
     public Double3 getKd() {
         return Kd;
-    }
-
-    /**
-     * Getter for nShininess field.
-     *
-     * @return The shininess of the material.
-     */
-    public int getShininess() {
-        return nShininess;
     }
 
     /**
@@ -62,55 +75,12 @@ public class Material {
     }
 
     /**
-     * Setter for the Ks field.
+     * Getter for nShininess field.
      *
-     * @param Ks specular reflectivity
-     * @return The material itself.
+     * @return The shininess of the material.
      */
-    public Material setKs(double Ks) {
-        this.Ks = new Double3(Ks);
-        return this;
-    }
-
-    /**
-     * Setter for the Ks field.
-     *
-     * @param Ks specular reflectivity
-     * @return The material itself.
-     */
-    public Material setKs(Double3 Ks) {
-        this.Ks = Ks;
-        return this;
-    }
-    public Material setKt(double Kt) {
-        this.Kt = new Double3(Kt);
-        return this;
-    }
-
-    /**
-     * Setter for the Kt field.
-     *
-     * @param Kt specular reflectivity
-     * @return The material itself.
-     */
-    public Material setKt(Double3 Kt) {
-        this.Kt = Kt;
-        return this;
-    }
-    public Material setKr(double Kr) {
-        this.Kr = new Double3(Kr);
-        return this;
-    }
-
-    /**
-     * Setter for the Kr field.
-     *
-     * @param Kr specular reflectivity
-     * @return The material itself.
-     */
-    public Material setKr(Double3 Kr) {
-        this.Kr = Kr;
-        return this;
+    public int getShininess() {
+        return nShininess;
     }
 
     /**
@@ -128,7 +98,39 @@ public class Material {
         return Kr;
     }
 
+    public Material setKr(double Kr) {
+        this.Kr = new Double3(Kr);
+        return this;
+    }
+
+    /**
+     * Setter for the Kr field.
+     *
+     * @param Kr specular reflectivity
+     * @return The material itself.
+     */
+    public Material setKr(Double3 Kr) {
+        this.Kr = Kr;
+        return this;
+    }
+
     public Double3 getKt() {
         return Kt;
+    }
+
+    public Material setKt(double Kt) {
+        this.Kt = new Double3(Kt);
+        return this;
+    }
+
+    /**
+     * Setter for the Kt field.
+     *
+     * @param Kt specular reflectivity
+     * @return The material itself.
+     */
+    public Material setKt(Double3 Kt) {
+        this.Kt = Kt;
+        return this;
     }
 }

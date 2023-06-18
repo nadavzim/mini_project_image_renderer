@@ -1,18 +1,18 @@
 /**
- A class representing a plane in a three-dimensional space.
+ * A class representing a plane in a three-dimensional space.
  */
 package geometries;
+
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
-public class Plane extends Geometry {
+public class Plane extends FlatGeometry {
     /**
      * The base point of the plane.
      */
@@ -72,7 +72,7 @@ public class Plane extends Geometry {
     }
 
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance, boolean bb) {
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
         Vector n = normal;

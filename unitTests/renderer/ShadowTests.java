@@ -12,7 +12,7 @@ import scene.Scene;
 /** Testing basic shadows
  * @author Dan */
 public class ShadowTests {
-   private Intersectable sphere     = new Sphere(new Point(0, 0, -200), 60d)                                         //
+   private Container sphere     = new Sphere(new Point(0, 0, -200), 60d)                                         //
       .setEmission(new Color(BLUE))                                                                                  //
       .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30));
    private Material      trMaterial = new Material().setKd(0.5).setKs(0.5).setShininess(30);

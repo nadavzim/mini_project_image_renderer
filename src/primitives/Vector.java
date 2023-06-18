@@ -1,6 +1,6 @@
 package primitives;
 
-public class Vector extends Point{
+public class Vector extends Point {
 
     /**
      * Constructs a new Vector object with the specified x, y, and z coordinates.
@@ -12,7 +12,7 @@ public class Vector extends Point{
      */
     public Vector(double x, double y, double z) {
         super(x, y, z);
-        if(xyz.equals(Double3.ZERO)){
+        if (xyz.equals(Double3.ZERO)) {
             throw new IllegalArgumentException("Vector can't be vector(0,0,0)");
         }
     }
@@ -24,7 +24,7 @@ public class Vector extends Point{
      */
     Vector(Double3 double3) {
         this(double3.d1, double3.d2, double3.d3);
-        if(xyz.equals(Double3.ZERO)){
+        if (xyz.equals(Double3.ZERO)) {
             throw new IllegalArgumentException("Vector can't be vector(0,0,0)");
         }
     }
@@ -48,7 +48,7 @@ public class Vector extends Point{
         double y = this.xyz.d2;
         double z = this.xyz.d3;
 
-        return x*x + y*y +z*z;
+        return x * x + y * y + z * z;
     }
 
     /**
@@ -69,9 +69,9 @@ public class Vector extends Point{
     public Vector normalize() {
         double len = length();
 
-        double x = this.xyz.d1/len;
-        double y = this.xyz.d2/len;
-        double z = this.xyz.d3/len;
+        double x = this.xyz.d1 / len;
+        double y = this.xyz.d2 / len;
+        double z = this.xyz.d3 / len;
 
         return new Vector(x, y, z);
 
@@ -99,9 +99,9 @@ public class Vector extends Point{
      * @return the dot product of this vector and the specified vector
      */
     public double dotProduct(Vector v3) {
-        double x = xyz.d1*v3.xyz.d1;
-        double y = xyz.d2*v3.xyz.d2;
-        double z = xyz.d3*v3.xyz.d3;
+        double x = xyz.d1 * v3.xyz.d1;
+        double y = xyz.d2 * v3.xyz.d2;
+        double z = xyz.d3 * v3.xyz.d3;
         return x + y + z;
     }
 
@@ -127,20 +127,21 @@ public class Vector extends Point{
      */
     @Override
     public boolean equals(Object o) {
-        if(this == o) return true;
+        if (this == o) return true;
         if (!(o instanceof Vector vector)) return false;
         return xyz.equals(vector.xyz);
     }
 
-/**
- * Returns a string representation of this Vector object.
- *
- * @return a string representation of this Vector object
- */
+    /**
+     * Returns a string representation of this Vector object.
+     *
+     * @return a string representation of this Vector object
+     */
     @Override
     public String toString() {
-        return "Vector: " + "xyz=" + xyz ;
+        return "Vector: " + "xyz=" + xyz;
     }
+
     /***
      * Rotate the vector by angle (in degrees) and axis of rotation
      * @param axis Axis of rotation
@@ -184,6 +185,16 @@ public class Vector extends Point{
                 + z * Math.cos(thetaRad)
                 + (-v * x + u * y) * Math.sin(thetaRad);
 
-        return new Vector( xPrime, yPrime, zPrime);
+        return new Vector(xPrime, yPrime, zPrime);
+    }
+
+    /**
+     * get the start of ray
+     *
+     * @return ray's head
+     */
+    public Point getHead() {
+        Point p = new Point(this.xyz);
+        return p;
     }
 }

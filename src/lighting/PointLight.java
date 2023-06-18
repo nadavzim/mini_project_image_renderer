@@ -3,18 +3,18 @@ package lighting;
 import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
-import geometries.Sphere;
-import java.util.Random;
+
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
-public class PointLight extends Light implements LightSource{
+public class PointLight extends Light implements LightSource {
 
-    private Point position;
+    private final Point position;
     private double kc = 1d;
     private double kl = 0d;
     private double kq = 0d;
-    private Double radius=100d;
+    private Double radius = 100d;
 
     public PointLight(Color intensity, Point position, Double radius) {
         super(intensity);
@@ -22,15 +22,14 @@ public class PointLight extends Light implements LightSource{
         this.radius = radius;
     }
 
-    public PointLight setRadius(Double radius) {
-        this.radius = radius;
-        return this;
-    }
-
-
     public PointLight(Color intensity, Point position) {
         super(intensity);
         this.position = position;
+    }
+
+    public PointLight setRadius(Double radius) {
+        this.radius = radius;
+        return this;
     }
 
     public PointLight setKc(double kc) {
@@ -58,7 +57,7 @@ public class PointLight extends Light implements LightSource{
     @Override
     public Color getIntensity(Point p) {
         double d = p.distance(position);
-        return getIntensity().scale(1/(kc + kl * d + kq * d * d));
+        return getIntensity().scale(1 / (kc + kl * d + kq * d * d));
     }
 
     /**
@@ -80,24 +79,23 @@ public class PointLight extends Light implements LightSource{
     public double getDistance(Point point) {
         return this.position.distance(point);
     }
+
     @Override
     public List<Vector> getListL(Point p) {
         Random r = new Random();
         List<Vector> vectors = new LinkedList();
-        for (double i = - radius; i < radius; i += radius / 10) {
-            for (double j = - radius; j < radius; j += radius / 10) {
+        for (double i = -radius; i < radius; i += radius / 10) {
+            for (double j = -radius; j < radius; j += radius / 10) {
                 if (i != 0 && j != 0) {
-                    Point point = position.add(new Vector(i, j,0.1d));
-                    if (point.equals(position)){
+                    Point point = position.add(new Vector(i, j, 0.1d));
+                    if (point.equals(position)) {
                         vectors.add(p.subtract(point).normalize());
-                    }
-                    else{
-                        try{
-                            if (point.subtract(position).dotProduct(point.subtract(position)) <= radius * radius){
+                    } else {
+                        try {
+                            if (point.subtract(position).dotProduct(point.subtract(position)) <= radius * radius) {
                                 vectors.add(p.subtract(point).normalize());
                             }
-                        }
-                        catch (Exception e){
+                        } catch (Exception e) {
                             vectors.add(p.subtract(point).normalize());
                         }
 

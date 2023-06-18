@@ -8,19 +8,32 @@ import java.util.List;
 import java.util.Random;
 
 public class Ray {
-     Point p0;
-     Vector dir;
     private static final double DELTA = 0.1;
+    Point p0;
+    Vector dir;
 
 
     /**
      * Constructs a Ray object with the given starting point and direction.
      * The direction vector is normalized.
+     *
      * @param p0  the starting point of the ray
      * @param dir the direction of the ray
      */
     public Ray(Point p0, Vector dir) {
         this.p0 = p0;
+        this.dir = dir.normalize();
+    }
+
+    /**
+     * Constructor for ray deflected by epsilon
+     *
+     * @param p0  origin
+     * @param n   normal vector
+     * @param dir direction
+     */
+    public Ray(Point p0, Vector n, Vector dir) {
+        this.p0 = p0.add(n.scale(n.dotProduct(dir) > 0 ? DELTA : -DELTA));
         this.dir = dir.normalize();
     }
 
@@ -31,18 +44,6 @@ public class Ray {
      */
     public Point getP0() {
         return p0;
-    }
-
-    /**
-     * Constructor for ray deflected by epsilon
-     *
-     * @param p0 origin
-     * @param n normal vector
-     * @param dir direction
-     */
-    public Ray(Point p0, Vector n, Vector dir) {
-        this.p0 = p0.add(n.scale(n.dotProduct(dir) > 0 ? DELTA : -DELTA));
-        this.dir = dir.normalize();
     }
 
     /**

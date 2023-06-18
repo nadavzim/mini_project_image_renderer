@@ -6,11 +6,11 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.MissingResourceException;
 
-import static primitives.Util.*;
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 
 public class Camera {
     // the camera's location
@@ -32,11 +32,31 @@ public class Camera {
 
     private int numberOfRaysInPixel = 0;
 
+    /**
+     * Camera constructor
+     *
+     * @param p0  the camera's location
+     * @param vTo the vector that point to the view plane
+     * @param vUp the vector that point up
+     */
+    public Camera(Point p0, Vector vTo, Vector vUp) {
+        if (!isZero(vUp.dotProduct(vTo)))
+            throw new IllegalArgumentException("vUp and vTo are not orthogonal");
+
+        this.p0 = p0;
+        this.vUp = vUp.normalize();
+        this.vTo = vTo.normalize();
+        this.vRight = vTo.crossProduct(vUp);
+
+    }
+
+    public static int getSign(double number) {
+        return number < 0 ? -1 : 1;
+    }
 
     public void setNumberOfRaysInPixel(int numberOfRaysInPixel) {
         this.numberOfRaysInPixel = numberOfRaysInPixel;
     }
-
 
     //------------------getters------------------//
     public Point getP0() {
@@ -62,33 +82,14 @@ public class Camera {
     public double getHeight() {
         return height;
     }
+    //------------------end of getters------------------//
 
     public double getDistance() {
         return distance;
     }
 
-
     public int numberOfRaysInPixel() {
         return numberOfRaysInPixel;
-    }
-    //------------------end of getters------------------//
-
-    /**
-     * Camera constructor
-     *
-     * @param p0  the camera's location
-     * @param vTo the vector that point to the view plane
-     * @param vUp the vector that point up
-     */
-    public Camera(Point p0, Vector vTo, Vector vUp) {
-        if (!isZero(vUp.dotProduct(vTo)))
-            throw new IllegalArgumentException("vUp and vTo are not orthogonal");
-
-        this.p0 = p0;
-        this.vUp = vUp.normalize();
-        this.vTo = vTo.normalize();
-        this.vRight = vTo.crossProduct(vUp);
-
     }
 
     /**
@@ -114,27 +115,28 @@ public class Camera {
         this.distance = distance;
         return this;
     }
+
     /**
      * set the image writer
      *
      * @param imageWriter the image writer
      * @return the camera
      */
-    public Camera setImageWriter (ImageWriter imageWriter) {
+    public Camera setImageWriter(ImageWriter imageWriter) {
         this.imageWriter = imageWriter;
         return this;
     }
+
     /**
      * set the ray tracer
      *
      * @param rayTracer the ray tracer
      * @return the camera
      */
-    public Camera setRayTracer (RayTracerBase rayTracer) {
+    public Camera setRayTracer(RayTracerBase rayTracer) {
         this.rayTracer = rayTracer;
         return this;
     }
-
 
     /**
      * construct a ray from the camera to the view plane
@@ -172,7 +174,7 @@ public class Camera {
     }
 
     /**
-     *  The function iterates over all the pixels in the image and casts a ray through each pixel
+     * The function iterates over all the pixels in the image and casts a ray through each pixel
      */
     public Camera renderImage() {
         try {
@@ -204,10 +206,11 @@ public class Camera {
     /**
      * construct a ray from the camera through a specific pixel in the View Plane
      * and get the color of the pixel
+     *
      * @param nX how many pixels are in the X dim
      * @param nY how many pixels are in the Y dim
-     * @param j the pixel to go through X dim
-     * @param i the pixel to go through Y dim
+     * @param j  the pixel to go through X dim
+     * @param i  the pixel to go through Y dim
      * @return the color of the pixel
      */
     private Color castRay(int nX, int nY, int j, int i) {
@@ -221,7 +224,7 @@ public class Camera {
      * @param interval the interval between the lines
      * @param color    the color of the grid
      */
-    public void  printGrid (int interval, Color color){
+    public void printGrid(int interval, Color color) {
         if (this.imageWriter == null) {
             throw new MissingResourceException("Renderer resource not set", "Render", "Image writer");
         }
@@ -235,6 +238,7 @@ public class Camera {
             }
         }
     }
+
     /**
      * If the imageWriter is not null, write to the image.
      */
@@ -252,6 +256,7 @@ public class Camera {
 
     /**
      * spin the camera 'angle' degrees clockwise around the To vector
+     *
      * @param angle the angle we want to spin the camera
      * @return this instance of camera
      */
@@ -263,21 +268,18 @@ public class Camera {
             vUp = vRight.scale(getSign(angle));
         } else if (isZero(sin0)) {
             vUp = vUp.scale(cos0);
-        }
-        else {//rotate around the To vector using Rodrigues' rotation formula
+        } else {//rotate around the To vector using Rodrigues' rotation formula
             vUp = vUp.scale(cos0)
                     .add(vTo.crossProduct(vUp).scale(sin0));
         }
         vRight = vTo.crossProduct(vUp).normalize();
         return this;
     }
-    public static int getSign(double number) {
-        return number < 0 ? -1 : 1;
-    }
 
     /**
      * spin the camera 'angle' degrees clockwise around the Up vector
-     * @param angle  the angle we want to spin the camera
+     *
+     * @param angle the angle we want to spin the camera
      * @return this instance of camera
      */
     public Camera spinRightLeft(double angle) {
@@ -288,8 +290,7 @@ public class Camera {
             vTo = vRight.scale(getSign(angle));
         } else if (isZero(sin0)) {
             vTo = vTo.scale(cos0);
-        }
-        else {//rotate around the To vector using Rodrigues' rotation formula
+        } else {//rotate around the To vector using Rodrigues' rotation formula
             vTo = vTo.scale(cos0)
                     .add(vUp.crossProduct(vTo).scale(Math.sin(angle)));
         }
@@ -299,6 +300,7 @@ public class Camera {
 
     /**
      * spin the camera 'angle' degrees clockwise around the Right vector
+     *
      * @param angle the angle we want to spin the camera
      * @return this instance of camera
      */
@@ -310,8 +312,7 @@ public class Camera {
             vTo = vUp.scale(getSign(angle));
         } else if (isZero(sin0)) {
             vTo = vUp.scale(cos0);
-        }
-        else {//rotate around the To vector using Rodrigues' rotation formula
+        } else {//rotate around the To vector using Rodrigues' rotation formula
             vTo = vTo.scale(cos0)
                     .add(vRight.crossProduct(vTo).scale(sin0));
         }
