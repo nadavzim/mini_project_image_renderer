@@ -178,11 +178,13 @@ public class Geometries extends Container {
                         bestGeometry1 = geometry1;
                         bestGeometry2 = geometry2;
                     }
+
                 }
             }
             // after we have determined the best geometries to couple in a container,
             // create new container which contains the geometries
-            containers.add(new Geometries(bestGeometry1, bestGeometry2));
+            if (bestGeometry1 != null && bestGeometry2 != null)
+                containers.add(new Geometries(bestGeometry1, bestGeometry2));
             // and remove the same ones from the original tree
             containers.remove(bestGeometry1);
             containers.remove(bestGeometry2);

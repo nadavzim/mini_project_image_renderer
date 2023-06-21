@@ -22,7 +22,7 @@ public class AntiAliasingTests {
     public void AA_test() {
 
 
-        int resolution = 600, sampleperpixle = 9;
+        int resolution = 1500, sampleperpixle = 81;
         Camera camera = new Camera(new Point(0,-200,1000), new Vector(0, 1, 0), new Vector(0, 0, 1)) //
                 .setVPSize(400, 400).setVPDistance(100);
         camera.setNumberOfRaysInPixel(sampleperpixle); // Turn on/off the test by changing the amount
@@ -78,7 +78,10 @@ public class AntiAliasingTests {
         Box bedSideStandLeft = new Box(300,300,100,new Point(-800,650,-101),new Color( 153,102,0)),
         bedSideStandRight = new Box(400,300,100,new Point(450,650,-101), new Color( 153,102,0)),
 
-        bed = new Box(900,150,500,new Point(-490,490,-15), new Color( 255,102,102));
+        bed = new Box(900,150,500,new Point(-490,490,-15), new Color( 255,102,102)),
+        rightPillow = new Box(350,60,150,new Point(0,700,150), new Color( 255,50,50)),
+        leftPillow = new Box(350,60,150,new Point(-400,700,150), new Color( 255,50,50));
+
 
         Box leftMirror = new Box(300,600,10,new Point(480,752,250), new Color(BLACK));
         Box rightMirror = new Box(300,600,10,new Point(-800,750,250), new Color(BLACK));
@@ -87,21 +90,30 @@ public class AntiAliasingTests {
 
         Box mirorCloset = new Box(10,1050,100,new Point(-610,320,0),new Color(BLACK));
 
+        Point watchhands = new Point(-60,730,1030);
+        Box longhand = new Box(20, 150, 20, watchhands,new Color(BLACK));
+        Box shorthand = new Box(80, 20, 20, watchhands,new Color(BLACK));
+
 
 
         for (Polygon rect: bedSideStandRight.getGeo()) {scene.geometries.add(rect.setMaterial(cube));}
         for (Polygon rect: bedSideStandLeft.getGeo()) {scene.geometries.add(rect.setMaterial(cube));}
         for (Polygon rect: bed.getGeo()) {scene.geometries.add(rect.setMaterial(cube));}
+        for (Polygon rect: rightPillow.getGeo()) {scene.geometries.add(rect.setMaterial(cube));}
+        for (Polygon rect: leftPillow.getGeo()) {scene.geometries.add(rect.setMaterial(cube));}
+
         for (Polygon rect: rightMirror.getGeo()) {scene.geometries.add(rect.setMaterial(mirror));}
         for (Polygon rect: leftMirror.getGeo()) {scene.geometries.add(rect.setMaterial(mirror));}
         for (Polygon rect: closet.getGeo()) {scene.geometries.add(rect.setMaterial(cube));}
         for (Polygon rect: mirorCloset.getGeo()) {scene.geometries.add(rect.setMaterial(mirror));}
+        for (Polygon rect: longhand.getGeo()) {scene.geometries.add(rect.setMaterial(new Material().setShininess(500).setKd(0.6).setKs(0.4)));}
+        for (Polygon rect: shorthand.getGeo()) {scene.geometries.add(rect.setMaterial(new Material().setShininess(500).setKd(0.6).setKs(0.4)));}
 
 
         scene.getGeometries().BuildBvhTree(); // build the auto bvh - critical for the run-time improvement
 
 
-        ImageWriter imageWriter = new ImageWriter("AA with 33", resolution, resolution);
+        ImageWriter imageWriter = new ImageWriter("AA with 65aa 2000res", resolution, resolution);
                 camera.setImageWriter(imageWriter)//.moveCamera(new Vector(-140, 80, 35)) //
                 .setImageWriter(imageWriter) //
                 .setRayTracer(new RayTracerBasic(scene));

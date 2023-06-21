@@ -188,6 +188,9 @@ public class Camera {
             int nY = imageWriter.getNy();
 
             for (int row = 0; row < nY; row++) {
+
+                System.out.println(row);
+
                 for (int col = 0; col < nX; col++) {
                     List<Ray> rays = constructRaysThroughPixel(nX, nY, row, col);
                     imageWriter.writePixel(row, col, rayTracer.calcAverageColor(rays));
