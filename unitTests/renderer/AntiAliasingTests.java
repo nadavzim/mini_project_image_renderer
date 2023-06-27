@@ -22,7 +22,7 @@ public class AntiAliasingTests {
     public void AA_test() {
 
 
-        int resolution = 1500, sampleperpixle = 81;
+        int resolution = 1000, sampleperpixle = 9;
         Camera camera = new Camera(new Point(0,-200,1000), new Vector(0, 1, 0), new Vector(0, 0, 1)) //
                 .setVPSize(400, 400).setVPDistance(100);
         camera.setNumberOfRaysInPixel(sampleperpixle); // Turn on/off the test by changing the amount
@@ -36,11 +36,21 @@ public class AntiAliasingTests {
         Color LightYellow = new Color(254,254,153);
 
         // spotlight in the middle of the ceiling direct to the floor
-        scene.getLights().add(new SpotLight(LightYellow, new Point(0, 400, 1580), new Vector(0, 0, -1)).setKc(1.6));
-        // pointLight in the left wall (above the closet) direct to the other wall
-        scene.getLights().add(new PointLight(LightYellow, new Point(-770, 400, 1200)).setKc(1.5));
+        scene.getLights().add(new SpotLight(LightYellow, new Point(0, 200, 1680), new Vector(0, 0, -1)).setKc(1.4).setRadius(30d));
+        Box cielinglight = new Box(500,30,250,new Point(-250,200,1580),new Color(YELLOW));
+
+
+        //bed spotlight's
+         scene.getLights().add(new SpotLight(LightYellow, new Point(200, 800, 400), new Vector(0, 0, -1)).setKc(1.25).setRadius(30d)); // right bed light
+        Sphere spotBedRight = new Sphere(new Point(200,800,400),40);
+        scene.getLights().add(new SpotLight(LightYellow, new Point(-300, 800, 400), new Vector(0, 0, -1)).setKc(1.25).setRadius(30d)); // left bed light
+        Sphere spotBedLeft = new Sphere(new Point(-300,800,400),40);
+
+     // pointLight in the left wall (above the closet) direct to the other wall
+        scene.getLights().add(new PointLight(LightYellow, new Point(-770, 400, 1200)).setKc(1.5).setRadius(30d));
+        Sphere pointSphere = new Sphere(new Point(-800,400,1200),40);
+
         // ball light
-//        scene.getLights().add(new PointLight(LightYellow, new Point(-0, 700, 600)).setKc(3));
         scene.getLights().add(new DirectionalLight(new Color(WHITE), new Vector(-0.75,0,-1)));
 
 
@@ -56,15 +66,18 @@ public class AntiAliasingTests {
         Material cube = new Material().setKd(0.6).setShininess(300).setKs(0.5);
         Material mirror = new Material().setKr(1);
         Material ball = new Material().setKd(0.5).setKs(0.5).setShininess(300);
+        Material lightBalls = new Material().setKt(0.9).setKd(0.9).setShininess(300);
 
-        Sphere s12 =  new Sphere(new Point(-50,750,1300),40);s12.setEmission(new Color(ORANGE)).setMaterial(ball);
-        Sphere s3 =  new Sphere(new Point(200,750,1050),40); s3.setEmission(new Color(ORANGE)).setMaterial(ball);
-        Sphere s6 =  new Sphere(new Point(-50,750,800),40);s6.setEmission(new Color(ORANGE)).setMaterial(ball);
-        Sphere s9 =  new Sphere(new Point(-300,750,1050),40);s9.setEmission(new Color(ORANGE)).setMaterial(ball);
+        // clock spheres
+        Sphere s12 =  new Sphere(new Point(-50,750,1300),40);s12.setEmission(new Color(200,0,0)).setMaterial(ball);
+        Sphere s3 =  new Sphere(new Point(200,750,1050),40); s3.setEmission(new Color(200,0,0)).setMaterial(ball);
+        Sphere s6 =  new Sphere(new Point(-50,750,800),40);s6.setEmission(new Color(200,0,0)).setMaterial(ball);
+        Sphere s9 =  new Sphere(new Point(-300,750,1050),40);s9.setEmission(new Color(200,0,0)).setMaterial(ball);
+
 
         scene.geometries.add( // walls of the room
                 new Polygon( M1,M2,M4,M3).setEmission(new Color(51,204,255))
-                        .setMaterial(new Material().setKt(0.2).setKd(0.3).setKr(0.3)), // window
+                        .setMaterial(new Material().setKt(0.4).setKd(0.3).setKr(0.3)), // window
                 new Polygon(A,M3,M1,C).setMaterial(walls).setEmission(new Color(GRAY)), // right wall
                 new Polygon(A,M3,M4,E).setMaterial(walls).setEmission(new Color(GRAY)), // right wall
                 new Polygon(E,M4,M2,F).setMaterial(walls).setEmission(new Color(GRAY)), // right wall
@@ -73,6 +86,10 @@ public class AntiAliasingTests {
                 new Polygon(E,F,H,G).setMaterial(walls).setEmission(new Color(GRAY)),// back wall
                 new Polygon(A,B,G,E).setMaterial(walls).setEmission(new Color(LIGHT_GRAY)), // ceiling
                 new Polygon(C,D,H,F).setMaterial(new Material().setKd(0.1)).setEmission(new Color(GRAY.darker())),// floor
+                pointSphere.setMaterial(lightBalls).setEmission(new Color(YELLOW)), // right wall light sphere
+                spotBedRight.setMaterial(lightBalls).setEmission(new Color(YELLOW)), // bed light sphere
+                spotBedLeft.setMaterial(lightBalls).setEmission(new Color(YELLOW)), // bed light sphere
+
                 s12, s3, s6, s9); // clock balls
 
         Box bedSideStandLeft = new Box(300,300,100,new Point(-800,650,-101),new Color( 153,102,0)),
@@ -109,27 +126,24 @@ public class AntiAliasingTests {
         for (Polygon rect: longhand.getGeo()) {scene.geometries.add(rect.setMaterial(new Material().setShininess(500).setKd(0.6).setKs(0.4)));}
         for (Polygon rect: shorthand.getGeo()) {scene.geometries.add(rect.setMaterial(new Material().setShininess(500).setKd(0.6).setKs(0.4)));}
 
+        for (Polygon rect: cielinglight.getGeo()) {scene.geometries.add(rect.setMaterial(new Material().setKt(0.9).setKd(0.9)));}
 
+
+        /* critic!*/
         scene.getGeometries().BuildBvhTree(); // build the auto bvh - critical for the run-time improvement
 
 
-        ImageWriter imageWriter = new ImageWriter("AA with 65aa 2000res", resolution, resolution);
+        ImageWriter imageWriter = new ImageWriter("final scene camera move right", resolution, resolution);
                 camera.setImageWriter(imageWriter)//.moveCamera(new Vector(-140, 80, 35)) //
                 .setImageWriter(imageWriter) //
-                .setRayTracer(new RayTracerBasic(scene))
-                .setMultithreading(0).setDebugPrint(0.1);
+                .setRayTracer(new RayTracerBasic(scene).setSoftShadow(true))
+               .setMultithreading(3);
+
+        camera.moveCamera(new Vector(150,50,0)).spinRightLeft(0.4).spin(0.7); // right angle photo
+//        camera.moveCamera(new Vector(-150,50,-200)).spinRightLeft(-0.45).spin(-1.6).spinUpDown(1);// left down photo
 
         camera.renderImage();
         camera.writeToImage();
-
-
-//        ImageWriter imageWriter3 = new ImageWriter("AA 65", resolution, resolution);
-//        camera3.setImageWriter(imageWriter3)//.moveCamera(new Vector(-140, 80, 35)) //
-//                .setRayTracer(new RayTracerBasic(scene));//turnAllBoxesOn())
-////                .setMultithreading(3).setDebugPrint();
-//
-//        camera3.renderImage();
-//        camera3.writeToImage();
     }
 
 }

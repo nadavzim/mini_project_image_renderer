@@ -5,17 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e31cecc-30d5-418a-833b-21c4a1f67da0" name="Changes" comment="add Multi-Threading">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_20_2023_6_42_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_20_2023_6_42_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_21_2023_10_17_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_21_2023_10_17_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/geometries/lamp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/renderer/PixelManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_20_2023_6_42_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_20_2023_6_42_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_21_2023_10_17_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_6_21_2023_10_17_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/images/AA with 65aa 2000res.png" beforeDir="false" afterPath="$PROJECT_DIR$/images/AA with 65aa 2000res.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Geometries.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Geometries.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/geometries/Intersectable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/geometries/Intersectable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitives/Ray.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitives/Ray.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/renderer/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/renderer/Camera.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/unitTests/renderer/AntiAliasingTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/AntiAliasingTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unitTests/renderer/TeapotTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/TeapotTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/unitTests/renderer/SoftShadow.java" beforeDir="false" afterPath="$PROJECT_DIR$/unitTests/renderer/SoftShadow.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +104,7 @@
       <recent name="geometries" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TeapotTest">
+  <component name="RunManager" selected="JUnit.AntiAliasingTests">
     <configuration name="All in ISE5783_1997_1609" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ISE5783_1997_1609" />
       <option name="PACKAGE_NAME" value="" />
@@ -178,9 +177,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AntiAliasingTests" />
         <item itemvalue="JUnit.TeapotTest" />
         <item itemvalue="JUnit.AntiAliasingTests.AA_test" />
-        <item itemvalue="JUnit.AntiAliasingTests" />
         <item itemvalue="JUnit.lampTest.lamp" />
         <item itemvalue="JUnit.All in ISE5783_1997_1609" />
       </list>

@@ -36,7 +36,6 @@ public class SoftShadow {
                 .setKc(1).setKl(0.0004).setKq(0.0000006).setRadius(50d));
 
 //        scen.getGeometries().BuildBvhTree();
-//        scen.setbb();
 
         camera.setImageWriter(new ImageWriter("softShadow", 1500, 1500)) //
                 .renderImage() //
@@ -55,7 +54,7 @@ public class SoftShadow {
                 new Sphere(new Point(0, 0, 30), 30)
                         .setEmission(new Color(java.awt.Color.MAGENTA))
                         .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setKt(0.3).setKr(0)),
-                new Plane(new Point(0, 0, 0), new Vector(0,0,1))
+                new Polygon(new Point(-1000,-1000,0), new Point(1000,-1000,0), new Point(1000,1000,0), new Point(-1000,1000,0))
                         .setEmission(new Color(java.awt.Color.BLUE))
                         .setMaterial(new Material().setKd(0.4).setKs(0.3).setShininess(100).setKt(0.3).setKr(0)));
 
