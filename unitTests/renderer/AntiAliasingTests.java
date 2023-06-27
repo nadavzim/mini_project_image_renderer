@@ -116,8 +116,8 @@ public class AntiAliasingTests {
         ImageWriter imageWriter = new ImageWriter("AA with 65aa 2000res", resolution, resolution);
                 camera.setImageWriter(imageWriter)//.moveCamera(new Vector(-140, 80, 35)) //
                 .setImageWriter(imageWriter) //
-                .setRayTracer(new RayTracerBasic(scene));
-//                .setMultithreading(3).setDebugPrint();
+                .setRayTracer(new RayTracerBasic(scene))
+                .setMultithreading(0).setDebugPrint(0.1);
 
         camera.renderImage();
         camera.writeToImage();

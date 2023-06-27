@@ -6,13 +6,25 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.MissingResourceException;
 
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
-
+import java.util.stream.*;
 public class Camera {
+    /** Pixel manager for supporting:
+     * <ul>
+     * <li>multi-threading</li>
+     * <li>debug print of progress percentage in Console window/tab</li>
+     * <ul>
+     */
+    private PixelManager pixelManager;
+    private int threadsCount;
+    private double printInterval;
+
+
     // the camera's location
     private Point p0;
     // the vector that point up
@@ -139,6 +151,21 @@ public class Camera {
     }
 
     /**
+     * Set the number of threads to use for rendering.
+     *
+     * @param n number of threads to use
+     * @return The camera object itself.
+     */
+    public Camera setMultithreading(int n) {
+        this.threadsCount = n;
+        return this;
+    }
+
+    public Camera setDebugPrint(double k) {
+        this.printInterval = k;
+        return this;
+    }
+    /**
      * construct a ray from the camera to the view plane
      *
      * @param nX the number of pixels in the width of the view plane
@@ -184,21 +211,30 @@ public class Camera {
             if (rayTracer == null) {
                 throw new MissingResourceException("Renderer resource not set", RayTracerBase.class.getName(), "");
             }
-            int nX = imageWriter.getNx();
-            int nY = imageWriter.getNy();
+            final int nX = imageWriter.getNx();
+            final int nY = imageWriter.getNy();
+            pixelManager = new PixelManager(nY, nX, printInterval);
 
-            for (int row = 0; row < nY; row++) {
-
-                System.out.println(row);
-
-                for (int col = 0; col < nX; col++) {
-                    List<Ray> rays = constructRaysThroughPixel(nX, nY, row, col);
-                    imageWriter.writePixel(row, col, rayTracer.calcAverageColor(rays));
-
-//                    Color color = castRay(nX, nY, row, col);
-//                    this.imageWriter.writePixel(row, col, color);
-                }
+            if (threadsCount == 0){
+                for (int i = 0; i < nY; ++i)
+                    for (int j = 0; j < nX; ++j)
+                        castRay(nX, nY, j, i);}
+            else { // see further... option 2
+                var threads = new LinkedList<Thread>(); // list of threads
+                while (threadsCount-- > 0) // add appropriate number of threads
+                    threads.add(new Thread(() -> { // add a thread with its code
+                        PixelManager.Pixel pixel; // current pixel(row,col)
+                        // allocate pixel(row,col) in loop until there are no more pixels
+                        while ((pixel = pixelManager.nextPixel()) != null)
+                            // cast ray through pixel (and color it – inside castRay)
+                            castRay(nX, nY, pixel.col(), pixel.row());
+                    }));
+                // start all the threads
+                for (var thread : threads) thread.start();
+                // wait until all the threads have finished
+                try { for (var thread : threads) thread.join(); } catch (InterruptedException ignore) {}
             }
+
 
         } catch (MissingResourceException e) {
             throw new UnsupportedOperationException("Not yet initialized" + e.getClassName());
@@ -206,19 +242,15 @@ public class Camera {
         return this;
     }
 
-    /**
-     * construct a ray from the camera through a specific pixel in the View Plane
-     * and get the color of the pixel
-     *
-     * @param nX how many pixels are in the X dim
-     * @param nY how many pixels are in the Y dim
-     * @param j  the pixel to go through X dim
-     * @param i  the pixel to go through Y dim
-     * @return the color of the pixel
+    /** Cast ray from camera and color a pixel
+     * @param nX resolution on X axis (number of pixels in row)
+     * @param nY resolution on Y axis (number of pixels in column)
+     * @param col pixel's column number (pixel index in row)
+     * @param row pixel's row number (pixel index in column)
      */
-    private Color castRay(int nX, int nY, int j, int i) {
-        Ray ray = this.constructRay(nX, nY, j, i);
-        return rayTracer.traceRay(ray);
+    private void castRay(int nX, int nY, int col, int row) {
+        imageWriter.writePixel(col, row, rayTracer.traceRay(constructRay(nX, nY, col, row)));
+        pixelManager.pixelDone();
     }
 
     /**
