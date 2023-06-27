@@ -212,6 +212,7 @@ public class RayTracerBasic extends RayTracerBase {
         // n
         Vector n = intersection.geometry.getNormal(intersection.point);
         double nv = alignZero(n.dotProduct(v));
+        // nv =
         if (nv == 0)
             return color;
         //  nShininess

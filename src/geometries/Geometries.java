@@ -153,7 +153,6 @@ public class Geometries extends Container {
      * automated build bounding volume hierarchy tree
      */
     public void BuildBvhTree() {
-
         // flatten the list of Geometries
         this.flatten();
 
@@ -178,7 +177,6 @@ public class Geometries extends Container {
                         bestGeometry1 = geometry1;
                         bestGeometry2 = geometry2;
                     }
-
                 }
             }
             // after we have determined the best geometries to couple in a container,

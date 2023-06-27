@@ -66,8 +66,9 @@ public class Camera {
         return number < 0 ? -1 : 1;
     }
 
-    public void setNumberOfRaysInPixel(int numberOfRaysInPixel) {
+    public Camera setNumberOfRaysInPixel(int numberOfRaysInPixel) {
         this.numberOfRaysInPixel = numberOfRaysInPixel;
+        return this;
     }
 
     //------------------getters------------------//
@@ -215,19 +216,27 @@ public class Camera {
             final int nY = imageWriter.getNy();
             pixelManager = new PixelManager(nY, nX, printInterval);
 
-            if (threadsCount == 0){
+            if (threadsCount == 0) {
                 for (int i = 0; i < nY; ++i)
-                    for (int j = 0; j < nX; ++j)
-                        castRay(nX, nY, j, i);}
+                    for (int j = 0; j < nX; ++j) {
+//                        System.out.println(i);
+                        castRay(nX, nY, j, i);
+                        List<Ray> rays = constructRaysThroughPixel(nX, nY, j, i);
+                        imageWriter.writePixel(j, i,rayTracer.calcAverageColor(rays));
+                    }
+            }
             else { // see further... option 2
                 var threads = new LinkedList<Thread>(); // list of threads
                 while (threadsCount-- > 0) // add appropriate number of threads
                     threads.add(new Thread(() -> { // add a thread with its code
                         PixelManager.Pixel pixel; // current pixel(row,col)
                         // allocate pixel(row,col) in loop until there are no more pixels
-                        while ((pixel = pixelManager.nextPixel()) != null)
+                        while ((pixel = pixelManager.nextPixel()) != null){
                             // cast ray through pixel (and color it – inside castRay)
-                            castRay(nX, nY, pixel.col(), pixel.row());
+                            List<Ray> rays = constructRaysThroughPixel(nX, nY, pixel.col(), pixel.row());
+                            imageWriter.writePixel(pixel.col(), pixel. row(),rayTracer.calcAverageColor(rays));
+                            System.out.println(pixel.col());
+                        }
                     }));
                 // start all the threads
                 for (var thread : threads) thread.start();
@@ -357,16 +366,12 @@ public class Camera {
 
 
     public List<Ray> constructRaysThroughPixel(int nX, int nY, int j, int i) {
-
         // the returned list of rays
         List<Ray> rays = new ArrayList<>();
-
         // add the center ray to the list
         Ray centerRay = constructRay(nX, nY, j, i);
         rays.add(centerRay);
-
-        // calculate the actual size of a pixel
-        // pixel height is the division of the view plane height in the number of rows of pixels
+        // calculate the actual size of a pixel. height is the div of the VP height in the number of rows of pixels
         double pixelHeight = alignZero(height / nY);   //  Ry = h/Ny
         // pixel width is the division of the view plane width in the number of columns of pixels
         double pixelWidth = alignZero(width / nX);   //  Rx = w/Nx
@@ -381,7 +386,6 @@ public class Camera {
                     pixelHeight)
             );
         }
-
         return rays;
     }
 

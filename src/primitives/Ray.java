@@ -168,11 +168,6 @@ public class Ray {
                     newRayStartPoint = newRayStartPoint.add(vUp.scale((j) * randomMoveY));
                 }
 
-//                // if we have reach the center point of the pixel
-//                if (i == raysInDimension / 2 && j == i) {
-//                    newRayStartPoint = pixelCenter;
-//                }
-
                 // make sure we do not add the canter ray more than once
                 if (!newRayStartPoint.equals(pixelCenter)) {
                     rays.add(new Ray(p0, (newRayStartPoint.subtract(p0)))); // normalized inside Ray constructor
