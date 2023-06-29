@@ -2,10 +2,11 @@
 made by  ynon haiun and nadav Zimmerman 2023
 
 ## final product:
+![final scene soft+aa](https://github.com/ynon123/ISE5783_1997_1609/assets/94478672/5c36cbb3-c128-443a-9111-1c479d1f8ec9)
 ![balls picture](https://github.com/ynon123/ISE5783_1997_1609/assets/94478672/9565c98a-c978-4268-9c46-d21d7ac9aceb)
 ![teapot](https://github.com/ynon123/ISE5783_1997_1609/assets/94478672/ab514555-1c43-4734-850d-b5b03b5b08f8)
 ![softShadow](https://github.com/ynon123/ISE5783_1997_1609/assets/94478672/75c693ca-3e87-4caf-a92e-bde0a2bda0ab)
-![AA 65](https://github.com/ynon123/ISE5783_1997_1609/assets/94478672/fd38ef87-bf15-482d-af39-c7da771b3dca)
+![AA without soft shadow ](https://github.com/ynon123/ISE5783_1997_1609/assets/94478672/fd38ef87-bf15-482d-af39-c7da771b3dca)
 
 
 ## About The Project
